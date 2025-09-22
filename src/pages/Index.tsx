@@ -46,16 +46,22 @@ const Index = () => {
 
       {/* Quick Stats */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {quickStats.map((stat) => (
-          <Card key={stat.label} className="enterprise-card">
+        {quickStats.map((stat, index) => (
+          <Card key={stat.label} className="stats-card group">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">
                 {stat.label}
               </CardTitle>
-              <stat.icon className={`h-4 w-4 ${stat.color}`} />
+              <stat.icon className={`h-5 w-5 ${stat.color} group-hover:scale-110 transition-transform duration-200`} />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stat.value}</div>
+              <div className="text-3xl font-bold gradient-text">{stat.value}</div>
+              <div className="h-1 w-full bg-muted rounded-full mt-2 overflow-hidden">
+                <div 
+                  className="h-full bg-gradient-primary transition-all duration-1000"
+                  style={{ width: `${60 + index * 10}%` }}
+                />
+              </div>
             </CardContent>
           </Card>
         ))}
@@ -63,28 +69,30 @@ const Index = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent Activity */}
-        <Card className="enterprise-card">
-          <CardHeader>
+        <Card className="glass-card">
+          <CardHeader className="bg-gradient-secondary">
             <CardTitle className="flex items-center gap-2">
               <TrendingUp className="h-5 w-5 text-primary" />
-              Recent Activity
+              <span className="gradient-text">Recent Activity</span>
             </CardTitle>
             <CardDescription>
               Latest updates from across your workspace
             </CardDescription>
           </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
+          <CardContent className="p-0">
+            <div className="space-y-1">
               {recentActivity.map((activity, index) => (
-                <div key={index} className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium">{activity.action}</p>
-                    <p className="text-xs text-muted-foreground">{activity.time}</p>
+                <div key={index} className="activity-item">
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-gradient-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <div className="flex-1">
+                      <p className="text-sm font-medium">{activity.action}</p>
+                      <p className="text-xs text-muted-foreground">{activity.time}</p>
+                    </div>
+                    <Badge variant="outline" className="text-xs bg-gradient-secondary">
+                      {activity.type}
+                    </Badge>
                   </div>
-                  <Badge variant="outline" className="text-xs">
-                    {activity.type}
-                  </Badge>
                 </div>
               ))}
             </div>
@@ -92,11 +100,11 @@ const Index = () => {
         </Card>
 
         {/* Quick Actions */}
-        <Card className="enterprise-card">
-          <CardHeader>
+        <Card className="glass-card">
+          <CardHeader className="bg-gradient-secondary">
             <CardTitle className="flex items-center gap-2">
               <CheckCircle className="h-5 w-5 text-primary" />
-              Quick Actions
+              <span className="gradient-text">Quick Actions</span>
             </CardTitle>
             <CardDescription>
               Jump into your most used features
@@ -104,21 +112,21 @@ const Index = () => {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 gap-3">
-              <Button variant="outline" className="h-16 flex flex-col gap-1 hover:bg-primary/5">
-                <Mail className="h-5 w-5" />
-                <span className="text-xs">Compose Email</span>
+              <Button variant="outline" className="h-20 flex flex-col gap-2 hover:bg-gradient-secondary hover:shadow-glow transition-all duration-300 group">
+                <Mail className="h-6 w-6 group-hover:text-primary transition-colors" />
+                <span className="text-sm font-medium">Compose Email</span>
               </Button>
-              <Button variant="outline" className="h-16 flex flex-col gap-1 hover:bg-primary/5">
-                <BarChart3 className="h-5 w-5" />
-                <span className="text-xs">New Project</span>
+              <Button variant="outline" className="h-20 flex flex-col gap-2 hover:bg-gradient-secondary hover:shadow-glow transition-all duration-300 group">
+                <BarChart3 className="h-6 w-6 group-hover:text-primary transition-colors" />
+                <span className="text-sm font-medium">New Project</span>
               </Button>
-              <Button variant="outline" className="h-16 flex flex-col gap-1 hover:bg-primary/5">
-                <Calendar className="h-5 w-5" />
-                <span className="text-xs">Schedule Meeting</span>
+              <Button variant="outline" className="h-20 flex flex-col gap-2 hover:bg-gradient-secondary hover:shadow-glow transition-all duration-300 group">
+                <Calendar className="h-6 w-6 group-hover:text-primary transition-colors" />
+                <span className="text-sm font-medium">Schedule Meeting</span>
               </Button>
-              <Button variant="outline" className="h-16 flex flex-col gap-1 hover:bg-primary/5">
-                <Users className="h-5 w-5" />
-                <span className="text-xs">Add Contact</span>
+              <Button variant="outline" className="h-20 flex flex-col gap-2 hover:bg-gradient-secondary hover:shadow-glow transition-all duration-300 group">
+                <Users className="h-6 w-6 group-hover:text-primary transition-colors" />
+                <span className="text-sm font-medium">Add Contact</span>
               </Button>
             </div>
           </CardContent>
@@ -126,29 +134,44 @@ const Index = () => {
       </div>
 
       {/* Module Overview */}
-      <Card className="enterprise-card">
-        <CardHeader>
-          <CardTitle>Module Overview</CardTitle>
+      <Card className="glass-card">
+        <CardHeader className="bg-gradient-secondary">
+          <CardTitle className="gradient-text">Module Overview</CardTitle>
           <CardDescription>
             Explore all available modules in your Sebenza One workspace
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-4 rounded-lg border bg-card hover:bg-accent/50 transition-colors cursor-pointer">
-              <h4 className="font-medium mb-2">Communication</h4>
-              <p className="text-sm text-muted-foreground mb-3">Email, Connect, Calendar</p>
-              <Badge className="bg-blue-100 text-blue-800">3 modules</Badge>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="group p-6 rounded-xl border-2 border-border bg-gradient-card hover:border-primary/30 hover:shadow-glow transition-all duration-300 cursor-pointer">
+              <div className="flex items-center justify-between mb-4">
+                <h4 className="font-semibold text-lg">Communication</h4>
+                <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                  <Mail className="h-6 w-6 text-white" />
+                </div>
+              </div>
+              <p className="text-sm text-muted-foreground mb-4">Email, Connect, Calendar</p>
+              <Badge className="bg-blue-500/10 text-blue-600 dark:text-blue-400">3 modules</Badge>
             </div>
-            <div className="p-4 rounded-lg border bg-card hover:bg-accent/50 transition-colors cursor-pointer">
-              <h4 className="font-medium mb-2">Productivity</h4>
-              <p className="text-sm text-muted-foreground mb-3">Projects, Drive, Notes, Planner</p>
-              <Badge className="bg-green-100 text-green-800">4 modules</Badge>
+            <div className="group p-6 rounded-xl border-2 border-border bg-gradient-card hover:border-primary/30 hover:shadow-glow transition-all duration-300 cursor-pointer">
+              <div className="flex items-center justify-between mb-4">
+                <h4 className="font-semibold text-lg">Productivity</h4>
+                <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                  <BarChart3 className="h-6 w-6 text-white" />
+                </div>
+              </div>
+              <p className="text-sm text-muted-foreground mb-4">Projects, Drive, Notes, Planner</p>
+              <Badge className="bg-green-500/10 text-green-600 dark:text-green-400">4 modules</Badge>
             </div>
-            <div className="p-4 rounded-lg border bg-card hover:bg-accent/50 transition-colors cursor-pointer">
-              <h4 className="font-medium mb-2">Business</h4>
-              <p className="text-sm text-muted-foreground mb-3">CRM, Accounting</p>
-              <Badge className="bg-orange-100 text-orange-800">2 modules</Badge>
+            <div className="group p-6 rounded-xl border-2 border-border bg-gradient-card hover:border-primary/30 hover:shadow-glow transition-all duration-300 cursor-pointer">
+              <div className="flex items-center justify-between mb-4">
+                <h4 className="font-semibold text-lg">Business</h4>
+                <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                  <Users className="h-6 w-6 text-white" />
+                </div>
+              </div>
+              <p className="text-sm text-muted-foreground mb-4">CRM, Accounting</p>
+              <Badge className="bg-orange-500/10 text-orange-600 dark:text-orange-400">2 modules</Badge>
             </div>
           </div>
         </CardContent>

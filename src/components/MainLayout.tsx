@@ -14,7 +14,7 @@ export function MainLayout({ children }: MainLayoutProps) {
         <AppSidebar />
         <div className="flex-1 flex flex-col">
           <TopNavigation />
-          <main className="flex-1 p-6 bg-muted/30">
+          <main className="flex-1 p-6 bg-gradient-to-br from-background via-background to-muted/20 min-h-screen">
             {children}
           </main>
         </div>
