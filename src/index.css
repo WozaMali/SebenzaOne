@@ -8,51 +8,59 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
+    /* Sebenza One Design System - White canvas with Rich Orange accents */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 0 0% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 0% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 0 0% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Rich Orange Primary (#E76F51) */
+    --primary: 12 75% 61%;
+    --primary-foreground: 0 0% 98%;
+    --primary-hover: 12 75% 55%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Subtle grays for secondary elements */
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 20%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Orange tinted accent */
+    --accent: 12 25% 95%;
+    --accent-foreground: 12 75% 45%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 0 0% 90%;
+    --input: 0 0% 95%;
+    --ring: 12 75% 61%;
 
     --radius: 0.5rem;
 
+    /* Sidebar colors */
     --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
+    --sidebar-foreground: 0 0% 25%;
+    --sidebar-primary: 12 75% 61%;
     --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 12 20% 96%;
+    --sidebar-accent-foreground: 0 0% 20%;
+    --sidebar-border: 0 0% 92%;
+    --sidebar-ring: 12 75% 61%;
 
-    --sidebar-accent: 240 4.8% 95.9%;
+    /* Enterprise shadows for 3D effect */
+    --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-dropdown: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --shadow-floating: 0 8px 24px rgba(0, 0, 0, 0.12);
 
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Smooth transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .dark {
@@ -101,5 +109,70 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+}
+
+@layer components {
+  /* Enterprise card styling */
+  .enterprise-card {
+    @apply bg-card border border-border rounded-lg transition-all duration-200;
+    box-shadow: var(--shadow-card);
+  }
+
+  .enterprise-card:hover {
+    box-shadow: var(--shadow-floating);
+    transform: translateY(-1px);
+  }
+
+  /* 3D Dropdown effects */
+  .dropdown-3d {
+    box-shadow: var(--shadow-dropdown);
+    @apply bg-popover border border-border rounded-lg backdrop-blur-sm;
+    animation: dropdown-appear 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Folding sidebar states */
+  .sidebar-collapsed {
+    width: 80px;
+    transition: var(--transition-smooth);
+  }
+
+  .sidebar-expanded {
+    width: 260px;
+    transition: var(--transition-smooth);
+  }
+
+  /* Orange accent line for active tabs */
+  .active-tab::after {
+    content: '';
+    @apply absolute bottom-0 left-0 right-0 h-0.5 bg-primary;
+  }
+
+  /* Module icons with hover effects */
+  .module-icon {
+    @apply w-5 h-5 transition-colors duration-200;
+  }
+
+  .module-icon:hover {
+    @apply text-primary;
+  }
+}
+
+@layer utilities {
+  /* Quick animation keyframes */
+  @keyframes dropdown-appear {
+    from {
+      opacity: 0;
+      transform: translateY(-8px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .animate-dropdown {
+    animation: dropdown-appear 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
