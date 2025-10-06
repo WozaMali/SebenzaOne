@@ -1,12 +1,25 @@
+"use client"
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import logoImage from "@/assets/SNWG LOGO.png";
 import ContactForm from "./ContactForm";
+import Image from "next/image";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const Navigation = () => {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
+  // Safe theme access with fallback
+  let theme = 'light';
+  try {
+    const themeContext = useTheme();
+    theme = themeContext.theme;
+  } catch (error) {
+    // Fallback to light theme if context is not available
+    theme = 'light';
+  }
   
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -19,9 +32,11 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-24">
           {/* Logo */}
           <div className="flex items-center">
-            <img
-              src={logoImage}
+            <Image
+              src={theme === 'light' ? "/SNW LOGO 1.png" : "/SNWG LOGO.png"}
               alt="Sebenza Nathi Waste Group Logo"
+              width={64}
+              height={64}
               className="h-16 w-auto"
             />
           </div>

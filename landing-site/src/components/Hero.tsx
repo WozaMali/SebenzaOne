@@ -1,7 +1,9 @@
+"use client"
+
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/Phakama Soweto.png";
 import Navigation from "./Navigation";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -22,10 +24,11 @@ const Hero = () => {
       <section className="relative h-screen w-full overflow-hidden">
         {/* Video/Image Background */}
         <div className="absolute inset-0">
-          <img
-            src={heroImage}
+          <Image
+            src="/Phakama Soweto.png"
             alt="Landfill waste management and recycling activities"
-            className="h-full w-full object-cover"
+            fill
+            className="object-cover"
             style={{
               transform: isLoaded ? 'scale(1)' : 'scale(2.5)',
               filter: isLoaded ? 'brightness(1) contrast(1) saturate(1)' : 'brightness(0.5) contrast(1.3) saturate(1.2)',
@@ -93,17 +96,18 @@ const Hero = () => {
                 Make Soweto Green.
               </span>
             </p>
-            <div className={`flex flex-col gap-3 sm:gap-4 sm:flex-row sm:justify-center transition-all duration-1000 ease-out delay-1400 ${
+            <div className={`flex flex-col gap-3 sm:gap-4 sm:flex-row sm:justify-center transition-all duration-1000 ease-out delay-1400 overflow-hidden ${
               isLoaded 
                 ? 'translate-y-0 opacity-100' 
                 : 'translate-y-8 opacity-0'
             }`}>
               <Button
                 size="lg"
-                className="group relative bg-primary text-primary-foreground hover:bg-primary/90 shadow-glow transition-all duration-500 text-base sm:text-lg hover:scale-110 hover:shadow-2xl hover:shadow-primary/30 overflow-hidden"
+                className={`group relative bg-primary text-primary-foreground hover:bg-primary/90 shadow-glow transition-all duration-1000 ease-out text-base sm:text-lg hover:scale-110 hover:shadow-2xl hover:shadow-primary/30 overflow-hidden ${
+                  isLoaded ? 'button-slide-in' : 'button-slide-left'
+                }`}
                 onClick={() => scrollToSection("woza-mali")}
                 style={{
-                  transform: isLoaded ? 'translateY(0) rotate(0deg)' : 'translateY(20px) rotate(-2deg)',
                   transitionDelay: '1500ms'
                 }}
               >
@@ -115,10 +119,11 @@ const Hero = () => {
               <Button
                 size="lg"
                 variant="outline"
-                className="group relative border-primary/50 text-foreground hover:bg-primary/10 transition-all duration-500 text-base sm:text-lg hover:scale-110 hover:border-primary hover:shadow-lg hover:shadow-primary/20 overflow-hidden"
+                className={`group relative border-primary/50 text-foreground hover:bg-primary/10 transition-all duration-1000 ease-out text-base sm:text-lg hover:scale-110 hover:border-primary hover:shadow-lg hover:shadow-primary/20 overflow-hidden ${
+                  isLoaded ? 'button-slide-in' : 'button-slide-right'
+                }`}
                 onClick={() => scrollToSection("green-scholar")}
                 style={{
-                  transform: isLoaded ? 'translateY(0) rotate(0deg)' : 'translateY(20px) rotate(2deg)',
                   transitionDelay: '1600ms'
                 }}
               >

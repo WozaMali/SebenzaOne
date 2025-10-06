@@ -1,3 +1,5 @@
+"use client"
+
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
 type Theme = 'light' | 'dark';
@@ -21,21 +23,31 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>(() => {
-    // Always check system preference first
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark';
-    }
+  const [theme, setTheme] = useState<Theme>('light');
+  const [mounted, setMounted] = useState(false);
+
+  // Initialize theme on client side only
+  useEffect(() => {
+    setMounted(true);
     
-    return 'light';
-  });
+    // Check system preference
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  }, []);
 
   useEffect(() => {
+    if (!mounted) return;
+    
     // Apply theme to document
     document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
+  }, [theme, mounted]);
 
   useEffect(() => {
+    if (!mounted) return;
+    
     // Listen for system theme changes
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     
@@ -48,7 +60,16 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
     // Cleanup
     return () => mediaQuery.removeEventListener('change', handleChange);
-  }, []);
+  }, [mounted]);
+
+  // Prevent hydration mismatch by not rendering until mounted
+  if (!mounted) {
+    return (
+      <ThemeContext.Provider value={{ theme: 'light' }}>
+        {children}
+      </ThemeContext.Provider>
+    );
+  }
 
   return (
     <ThemeContext.Provider value={{ theme }}>

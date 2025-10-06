@@ -1,8 +1,10 @@
+"use client"
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Coins, BarChart3, Zap, Home, Scale, DollarSign, TrendingUp } from "lucide-react";
-import landImage from "@/assets/Land.png";
 import { useEffect, useState, useRef } from "react";
+import Image from "next/image";
 
 const WozaMali = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -62,7 +64,7 @@ const WozaMali = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src={landImage}
+          src="/Land.png"
           alt="Landfill landscape"
           className="h-full w-full object-cover"
         />
@@ -97,52 +99,23 @@ const WozaMali = () => {
 
         {/* Perks Section */}
         <div className="mb-16">
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-3 card-container">
             {perks.map((perk, index) => (
+              <div key={index} className="relative group">
               <Card
-                key={index}
-                     className={`group border-border bg-card transform-gpu relative overflow-hidden transition-all duration-1000 ease-out ${
-                       isVisible 
-                         ? 'translate-y-0 opacity-100' 
-                         : 'translate-y-20 opacity-0'
-                     }`}
-                     style={{
-                       transitionDelay: `${800 + index * 300}ms`,
-                       transform: isVisible 
-                         ? 'perspective(1000px) rotateX(5deg) rotateY(-2deg)' 
-                         : 'perspective(1000px) rotateX(15deg) rotateY(-10deg) translateY(20px)',
-                       boxShadow: isVisible 
-                         ? `
-                           0 25px 50px rgba(0, 0, 0, 0.25),
-                           0 12px 24px rgba(0, 0, 0, 0.15),
-                           inset 0 1px 0 rgba(255, 255, 255, 0.1)
-                         `
-                         : `
-                           0 50px 100px rgba(0, 0, 0, 0.4),
-                           0 25px 50px rgba(0, 0, 0, 0.3),
-                           inset 0 1px 0 rgba(255, 255, 255, 0.05)
-                         `,
-                       border: '1px solid rgba(255, 255, 255, 0.1)'
-                     }}
-                     onMouseEnter={(e) => {
-                       e.currentTarget.style.transform = 'perspective(1000px) rotateX(2deg) rotateY(-1deg) translateY(-8px) scale(1.02)';
-                       e.currentTarget.style.boxShadow = `
-                         0 35px 70px rgba(0, 0, 0, 0.35),
-                         0 20px 40px rgba(0, 0, 0, 0.25),
-                         0 0 40px rgba(34, 197, 94, 0.4),
-                         0 0 80px rgba(34, 197, 94, 0.2),
-                         inset 0 1px 0 rgba(255, 255, 255, 0.2)
-                       `;
-                     }}
-                     onMouseLeave={(e) => {
-                       e.currentTarget.style.transform = 'perspective(1000px) rotateX(5deg) rotateY(-2deg)';
-                       e.currentTarget.style.boxShadow = `
-                         0 25px 50px rgba(0, 0, 0, 0.25),
-                         0 12px 24px rgba(0, 0, 0, 0.15),
-                         inset 0 1px 0 rgba(255, 255, 255, 0.1)
-                       `;
-                     }}
-                   >
+                className={`border-border bg-card transform-gpu relative overflow-hidden card-hover ${
+                  isVisible 
+                    ? 'translate-y-0 opacity-100' 
+                    : 'translate-y-20 opacity-0'
+                }`}
+                style={{
+                  transitionDelay: `${800 + index * 300}ms`,
+                  transform: isVisible 
+                    ? 'perspective(1000px) rotateX(5deg) rotateY(-2deg)' 
+                    : 'perspective(1000px) rotateX(15deg) rotateY(-10deg) translateY(20px)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)'
+                }}
+                >
                      <CardContent className="p-6 relative z-10">
                        {/* Floating Icon with Depth */}
                        <div 
@@ -191,15 +164,16 @@ const WozaMali = () => {
                        }}
                      ></div>
 
-                       {/* Hover Flare Effect */}
-                       <div 
-                         className="absolute top-0 left-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                         style={{
-                           background: 'radial-gradient(circle at 50% 30%, rgba(34, 197, 94, 0.3) 0%, rgba(34, 197, 94, 0.15) 30%, transparent 60%)',
-                           transform: 'translateZ(-3px)'
-                         }}
-                       ></div>
-              </Card>
+                  {/* Hover Flare Effect */}
+                  <div 
+                    className="absolute top-0 left-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    style={{
+                      background: 'radial-gradient(circle at 50% 30%, rgba(34, 197, 94, 0.3) 0%, rgba(34, 197, 94, 0.15) 30%, transparent 60%)',
+                      transform: 'translateZ(-3px)'
+                    }}
+                  ></div>
+                </Card>
+              </div>
             ))}
           </div>
         </div>
@@ -207,46 +181,15 @@ const WozaMali = () => {
         {/* Flow Chart with Illustrations */}
         <div className="mb-12">
           <h3 className="mb-8 text-center text-2xl font-semibold">How you earn through Woza Mali</h3>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 card-container">
             {flowSteps.map((step, index) => (
               <div key={index} className="relative">
                        <div className="relative group">
-                         {/* Glow effect container - outside the card */}
-                         <div 
-                           className="absolute -inset-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                           style={{
-                             background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(16, 185, 129, 0.2))',
-                             filter: 'blur(8px)',
-                             zIndex: -1
-                           }}
-                         />
                          <Card 
-                           className="border-primary/30 bg-card/50 h-full transform-gpu relative overflow-hidden transition-all duration-500 ease-out"
+                           className="border-primary/30 bg-card/50 h-full transform-gpu relative overflow-hidden card-hover"
                            style={{
-                             transform: 'perspective(1000px) rotateX(5deg) rotateY(-2deg)',
-                             boxShadow: `
-                               0 25px 50px rgba(0, 0, 0, 0.25),
-                               0 12px 24px rgba(0, 0, 0, 0.15),
-                               inset 0 1px 0 rgba(255, 255, 255, 0.1)
-                             `,
                              border: '1px solid rgba(255, 255, 255, 0.1)'
                            }}
-                                  onMouseEnter={(e) => {
-                                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(2deg) rotateY(-1deg) translateY(-8px) scale(1.02)';
-                                    e.currentTarget.style.boxShadow = `
-                                      0 35px 70px rgba(0, 0, 0, 0.35),
-                                      0 20px 40px rgba(0, 0, 0, 0.25),
-                                      inset 0 1px 0 rgba(255, 255, 255, 0.2)
-                                    `;
-                                  }}
-                                  onMouseLeave={(e) => {
-                                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(5deg) rotateY(-2deg)';
-                                    e.currentTarget.style.boxShadow = `
-                                      0 25px 50px rgba(0, 0, 0, 0.25),
-                                      0 12px 24px rgba(0, 0, 0, 0.15),
-                                      inset 0 1px 0 rgba(255, 255, 255, 0.1)
-                                    `;
-                                  }}
                          >
                          <CardContent className="p-6 text-center relative z-10">
                            {/* Floating Icon with Depth */}

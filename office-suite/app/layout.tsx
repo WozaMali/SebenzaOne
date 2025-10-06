@@ -10,6 +10,11 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Sebenza Suite Interface',
   description: 'A comprehensive business suite interface',
+  icons: {
+    icon: '/favi.png',
+    shortcut: '/favi.png',
+    apple: '/favi.png',
+  },
 }
 
 export default function RootLayout({

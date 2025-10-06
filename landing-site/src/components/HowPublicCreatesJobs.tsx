@@ -1,3 +1,5 @@
+"use client"
+
 import { Home, Scale, Share2 } from "lucide-react";
 
 const HowPublicCreatesJobs = () => {

@@ -1,3 +1,5 @@
+"use client"
+
 import { X, GraduationCap, Lightbulb, TrendingUp, Users, BookOpen, Heart, Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
 

@@ -1,12 +1,13 @@
+"use client"
+
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { GraduationCap, Lightbulb, TrendingUp, ArrowRightLeft } from "lucide-react";
 import { toast } from "sonner";
-import maishaImage from "@/assets/Maisha.png";
-import greenScholarLogo from "@/assets/Green Scholar.png";
 import GreenScholarPopup from "./GreenScholarPopup";
+import Image from "next/image";
 
 const GreenScholar = () => {
   const [formData, setFormData] = useState({
@@ -95,7 +96,7 @@ const GreenScholar = () => {
               : 'translate-y-8 opacity-0'
           }`}>
             <img
-              src={greenScholarLogo}
+              src="/Green Scholar.png"
               alt="Green Scholar Logo"
               className="h-32 w-auto"
             />
@@ -221,7 +222,7 @@ const GreenScholar = () => {
           <div className="flex justify-center items-center">
             <div className="relative">
               <img
-                src={maishaImage}
+                src="/Maisha.png"
                 alt="Maisha bottle buddy - Green Scholar mascot"
                 className="w-full max-w-md h-auto"
               />
