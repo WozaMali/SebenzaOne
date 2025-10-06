@@ -24,9 +24,21 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   // Ensure static assets are properly served
-  assetPrefix: process.env.NODE_ENV === 'production' ? '' : '',
+  assetPrefix: '',
   // Add base path if needed for deployment
   basePath: '',
+  // Ensure all static assets are included
+  distDir: 'out',
+  // Add webpack configuration for better asset handling
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+      };
+    }
+    return config;
+  },
 }
 
 module.exports = nextConfig

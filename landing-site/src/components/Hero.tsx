@@ -35,8 +35,14 @@ const Hero = () => {
             }}
             onError={(e) => {
               console.error('Hero image failed to load:', e);
-              // Fallback to a solid color background
-              e.currentTarget.style.display = 'none';
+              console.log('Attempting to load:', e.currentTarget.src);
+              // Try alternative path
+              const img = e.currentTarget;
+              if (!img.src.includes('hero-landfill.jpg')) {
+                img.src = '/hero-landfill.jpg';
+              } else {
+                img.style.display = 'none';
+              }
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/70 to-background"></div>

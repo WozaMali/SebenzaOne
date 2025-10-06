@@ -1,5 +1,5 @@
-import ImageTest from '@/components/ImageTest'
+import ImageDebugger from '@/components/ImageDebugger'
 
 export default function ImageTestPage() {
-  return <ImageTest />
+  return <ImageDebugger />
 }
