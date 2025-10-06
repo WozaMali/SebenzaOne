@@ -218,7 +218,7 @@ export function DomainWizard({ isOpen, onClose, onComplete }: DomainWizardProps)
             <div>
               <h3 className="text-lg font-semibold text-foreground mb-2">DNS Configuration</h3>
               <p className="text-sm text-muted-foreground">
-                Configure the following DNS records for your domain. Click "Copy" to copy each record to your clipboard.
+                Configure the following DNS records for your domain. Click &quot;Copy&quot; to copy each record to your clipboard.
               </p>
             </div>
 
