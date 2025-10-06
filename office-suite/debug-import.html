@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Import Debug Tool</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .error { background-color: #ffebee; border-color: #f44336; }
+        .success { background-color: #e8f5e8; border-color: #4caf50; }
+        .warning { background-color: #fff3e0; border-color: #ff9800; }
+        pre { background-color: #f5f5f5; padding: 10px; border-radius: 3px; overflow-x: auto; }
+        button { padding: 10px 20px; margin: 5px; background-color: #2196f3; color: white; border: none; border-radius: 3px; cursor: pointer; }
+        button:hover { background-color: #1976d2; }
+        .file-input { margin: 10px 0; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin: 10px 0; }
+        .stat { padding: 10px; background-color: #f0f0f0; border-radius: 3px; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Email Import Debug Tool</h1>
+        <p>This tool helps you debug email import issues by analyzing your backup file format.</p>
+        
+        <div class="section">
+            <h3>1. Upload Your Backup File</h3>
+            <div class="file-input">
+                <input type="file" id="fileInput" accept=".json,.csv" />
+                <button onclick="analyzeFile()">Analyze File</button>
+            </div>
+        </div>
+        
+        <div id="results" style="display: none;">
+            <div class="section">
+                <h3>2. File Analysis Results</h3>
+                <div id="fileInfo"></div>
+            </div>
+            
+            <div class="section">
+                <h3>3. Email Data Structure</h3>
+                <div id="structureInfo"></div>
+            </div>
+            
+            <div class="section">
+                <h3>4. Sample Email (First 3)</h3>
+                <div id="sampleEmails"></div>
+            </div>
+            
+            <div class="section">
+                <h3>5. Transformation Test</h3>
+                <div id="transformationTest"></div>
+            </div>
+            
+            <div class="section">
+                <h3>6. Recommendations</h3>
+                <div id="recommendations"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let fileData = null;
+        
+        function analyzeFile() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                alert('Please select a file first');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    if (file.name.endsWith('.json')) {
+                        fileData = JSON.parse(e.target.result);
+                    } else if (file.name.endsWith('.csv')) {
+                        fileData = parseCSV(e.target.result);
+                    } else {
+                        throw new Error('Unsupported file format');
+                    }
+                    
+                    analyzeData();
+                    document.getElementById('results').style.display = 'block';
+                } catch (error) {
+                    alert('Error reading file: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+        }
+        
+        function parseCSV(csvText) {
+            const lines = csvText.split('\n').filter(line => line.trim());
+            const headers = lines[0].split(',').map(h => h.trim());
+            return lines.slice(1).map(line => {
+                const values = line.split(',').map(v => v.trim());
+                const obj = {};
+                headers.forEach((header, index) => {
+                    obj[header] = values[index] || '';
+                });
+                return obj;
+            });
+        }
+        
+        function analyzeData() {
+            const fileInfo = document.getElementById('fileInfo');
+            const structureInfo = document.getElementById('structureInfo');
+            const sampleEmails = document.getElementById('sampleEmails');
+            const transformationTest = document.getElementById('transformationTest');
+            const recommendations = document.getElementById('recommendations');
+            
+            // File info
+            fileInfo.innerHTML = `
+                <div class="stats">
+                    <div class="stat">
+                        <strong>File Type:</strong><br>
+                        ${Array.isArray(fileData) ? 'Array' : 'Object'}
+                    </div>
+                    <div class="stat">
+                        <strong>Total Items:</strong><br>
+                        ${Array.isArray(fileData) ? fileData.length : Object.keys(fileData).length}
+                    </div>
+                    <div class="stat">
+                        <strong>Has Emails Array:</strong><br>
+                        ${fileData.emails ? 'Yes' : 'No'}
+                    </div>
+                </div>
+            `;
+            
+            // Structure analysis
+            let emails = [];
+            if (Array.isArray(fileData)) {
+                emails = fileData;
+            } else if (fileData.emails && Array.isArray(fileData.emails)) {
+                emails = fileData.emails;
+            }
+            
+            if (emails.length === 0) {
+                structureInfo.innerHTML = '<div class="error">No email data found in the file</div>';
+                return;
+            }
+            
+            const firstEmail = emails[0];
+            const requiredFields = ['subject', 'from', 'to', 'body', 'date'];
+            const optionalFields = ['cc', 'bcc', 'isRead', 'isStarred', 'folder', 'labels'];
+            
+            const hasRequired = requiredFields.filter(field => 
+                firstEmail.hasOwnProperty(field) || 
+                firstEmail.hasOwnProperty(field.charAt(0).toUpperCase() + field.slice(1)) ||
+                firstEmail.hasOwnProperty(field.toUpperCase())
+            );
+            
+            const hasOptional = optionalFields.filter(field => 
+                firstEmail.hasOwnProperty(field) || 
+                firstEmail.hasOwnProperty(field.charAt(0).toUpperCase() + field.slice(1)) ||
+                firstEmail.hasOwnProperty(field.toUpperCase())
+            );
+            
+            structureInfo.innerHTML = `
+                <div class="stats">
+                    <div class="stat">
+                        <strong>Required Fields:</strong><br>
+                        ${hasRequired.length}/${requiredFields.length} found
+                    </div>
+                    <div class="stat">
+                        <strong>Optional Fields:</strong><br>
+                        ${hasOptional.length}/${optionalFields.length} found
+                    </div>
+                    <div class="stat">
+                        <strong>Total Fields:</strong><br>
+                        ${Object.keys(firstEmail).length}
+                    </div>
+                </div>
+                <h4>Available Fields:</h4>
+                <pre>${JSON.stringify(Object.keys(firstEmail), null, 2)}</pre>
+            `;
+            
+            // Sample emails
+            sampleEmails.innerHTML = `
+                <pre>${JSON.stringify(emails.slice(0, 3), null, 2)}</pre>
+            `;
+            
+            // Transformation test
+            const testResults = emails.slice(0, 3).map((email, index) => {
+                try {
+                    const transformed = transformEmail(email);
+                    return {
+                        index,
+                        success: true,
+                        result: transformed
+                    };
+                } catch (error) {
+                    return {
+                        index,
+                        success: false,
+                        error: error.message
+                    };
+                }
+            });
+            
+            transformationTest.innerHTML = `
+                <h4>Transformation Results:</h4>
+                ${testResults.map(result => `
+                    <div class="${result.success ? 'success' : 'error'}">
+                        <strong>Email ${result.index + 1}:</strong> 
+                        ${result.success ? 'Success' : 'Failed - ' + result.error}
+                        ${result.success ? `<pre>${JSON.stringify(result.result, null, 2)}</pre>` : ''}
+                    </div>
+                `).join('')}
+            `;
+            
+            // Recommendations
+            let recs = [];
+            if (hasRequired.length < requiredFields.length) {
+                recs.push('Missing required fields. Ensure your backup has: subject, from, to, body, date');
+            }
+            if (emails.length > 0 && !firstEmail.subject) {
+                recs.push('Subject field is missing or empty. Check field names (subject, Subject, SUBJECT)');
+            }
+            if (emails.length > 0 && !firstEmail.from) {
+                recs.push('From field is missing. Check field names (from, From, FROM, sender)');
+            }
+            if (emails.length > 0 && !firstEmail.to) {
+                recs.push('To field is missing. Check field names (to, To, TO, recipients)');
+            }
+            if (testResults.some(r => !r.success)) {
+                recs.push('Some emails failed transformation. Check the error messages above.');
+            }
+            if (recs.length === 0) {
+                recs.push('Your backup file looks good! It should import successfully.');
+            }
+            
+            recommendations.innerHTML = `
+                <ul>
+                    ${recs.map(rec => `<li>${rec}</li>`).join('')}
+                </ul>
+            `;
+        }
+        
+        function transformEmail(data) {
+            // Simplified transformation logic
+            return {
+                id: data.id || data.messageId || `imported-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+                subject: data.subject || data.Subject || data.headers?.subject || 'No Subject',
+                from: parseEmailAddress(data.from || data.From || data.headers?.from || data.sender),
+                to: parseEmailAddresses(data.to || data.To || data.headers?.to || data.recipients || []),
+                body: data.body || data.Body || data.content || data.text || data.html || '',
+                isHtml: Boolean(data.isHtml || data.is_html || data.html),
+                date: new Date(data.date || data.Date || data.timestamp || data.time || new Date()),
+                folder: data.folder || data.Folder || data.mailbox || 'inbox',
+                isRead: Boolean(data.isRead || data.is_read || data.read),
+                isStarred: Boolean(data.isStarred || data.is_starred || data.starred),
+                labels: Array.isArray(data.labels) ? data.labels : (data.labels ? data.labels.split(',') : [])
+            };
+        }
+        
+        function parseEmailAddress(address) {
+            if (!address) return { name: 'Unknown', email: 'unknown@example.com', displayName: 'Unknown' };
+            
+            if (typeof address === 'string') {
+                const match = address.match(/^(.+?)\s*<(.+?)>$/);
+                if (match) {
+                    return {
+                        name: match[1].trim(),
+                        email: match[2].trim(),
+                        displayName: match[1].trim()
+                    };
+                }
+                return {
+                    name: address,
+                    email: address,
+                    displayName: address
+                };
+            }
+            
+            if (typeof address === 'object') {
+                return {
+                    name: address.name || address.displayName || address.email || 'Unknown',
+                    email: address.email || address.address || 'unknown@example.com',
+                    displayName: address.displayName || address.name || address.email || 'Unknown'
+                };
+            }
+            
+            return { name: 'Unknown', email: 'unknown@example.com', displayName: 'Unknown' };
+        }
+        
+        function parseEmailAddresses(addresses) {
+            if (!addresses) return [];
+            
+            if (Array.isArray(addresses)) {
+                return addresses.map(addr => parseEmailAddress(addr));
+            }
+            
+            if (typeof addresses === 'string') {
+                return addresses.split(',').map(addr => parseEmailAddress(addr.trim()));
+            }
+            
+            return [parseEmailAddress(addresses)];
+        }
+    </script>
+</body>
+</html>

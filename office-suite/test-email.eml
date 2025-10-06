@@ -1,0 +1,26 @@
+From: test@example.com
+To: user@example.com
+Subject: Test HTML Email
+Date: Mon, 01 Jan 2024 12:00:00 +0000
+MIME-Version: 1.0
+Content-Type: text/html; charset=UTF-8
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Email</title>
+</head>
+<body>
+    <h1>Test HTML Email</h1>
+    <p>This is a <strong>test email</strong> with <em>HTML formatting</em>.</p>
+    <p>It should display properly with:</p>
+    <ul>
+        <li>Bold text</li>
+        <li>Italic text</li>
+        <li>Lists</li>
+        <li>Proper formatting</li>
+    </ul>
+    <p>If you see this as code instead of formatted text, there's an issue with HTML rendering.</p>
+    <p>This email contains HTML tags and should be rendered as HTML, not displayed as raw code.</p>
+</body>
+</html>

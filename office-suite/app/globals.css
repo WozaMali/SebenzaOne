@@ -1,0 +1,1747 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Modern Scrollbar Styles for Day and Night Modes */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+}
+
+/* Webkit scrollbar styles for Chrome, Safari, Edge */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.5);
+  border-radius: 4px;
+  border: 1px solid transparent;
+  background-clip: content-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(107, 114, 128, 0.7);
+  background-clip: content-box;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background: rgba(75, 85, 99, 0.8);
+  background-clip: content-box;
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Dark mode scrollbar styles */
+@media (prefers-color-scheme: dark) {
+  * {
+    scrollbar-color: rgba(75, 85, 99, 0.6) transparent;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background: rgba(75, 85, 99, 0.6);
+  }
+  
+  *::-webkit-scrollbar-thumb:hover {
+    background: rgba(107, 114, 128, 0.8);
+  }
+  
+  *::-webkit-scrollbar-thumb:active {
+    background: rgba(156, 163, 175, 0.9);
+  }
+}
+
+/* ULTRA AGGRESSIVE - Force no horizontal scroll on first panel */
+.mail-sidebar {
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  word-wrap: break-word !important;
+  white-space: normal !important;
+  max-width: 250px !important;
+  min-width: 250px !important;
+  width: 250px !important;
+}
+
+.mail-sidebar * {
+  max-width: 100% !important;
+  word-wrap: break-word !important;
+  white-space: normal !important;
+  overflow-wrap: break-word !important;
+}
+
+.mail-sidebar .space-y-4 {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+/* Handle collapsed state */
+.mail-sidebar.collapsed {
+  width: 60px !important;
+  min-width: 60px !important;
+  max-width: 60px !important;
+}
+
+/* Custom scrollbar for mail panels */
+.mail-sidebar::-webkit-scrollbar,
+.mail-middle::-webkit-scrollbar,
+.mail-right::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mail-sidebar::-webkit-scrollbar-thumb,
+.mail-middle::-webkit-scrollbar-thumb,
+.mail-right::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(251, 146, 60, 0.6), rgba(234, 88, 12, 0.6));
+  border-radius: 6px;
+  border: none;
+}
+
+.mail-sidebar::-webkit-scrollbar-thumb:hover,
+.mail-middle::-webkit-scrollbar-thumb:hover,
+.mail-right::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(251, 146, 60, 0.8), rgba(234, 88, 12, 0.8));
+}
+
+.mail-sidebar::-webkit-scrollbar-track,
+.mail-middle::-webkit-scrollbar-track,
+.mail-right::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+}
+
+/* Dark mode for mail panels */
+@media (prefers-color-scheme: dark) {
+  .mail-sidebar::-webkit-scrollbar-thumb,
+  .mail-middle::-webkit-scrollbar-thumb,
+  .mail-right::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(251, 146, 60, 0.7), rgba(234, 88, 12, 0.7));
+  }
+  
+  .mail-sidebar::-webkit-scrollbar-thumb:hover,
+  .mail-middle::-webkit-scrollbar-thumb:hover,
+  .mail-right::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, rgba(251, 146, 60, 0.9), rgba(234, 88, 12, 0.9));
+  }
+  
+  .mail-sidebar::-webkit-scrollbar-track,
+  .mail-middle::-webkit-scrollbar-track,
+  .mail-right::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  
+  /* Dark mode text colors for 3rd panel (right panel) */
+  .mail-right {
+    color: white !important;
+  }
+  
+  .mail-right * {
+    color: white !important;
+  }
+  
+  .mail-right .prose {
+    color: white !important;
+  }
+  
+  .mail-right .prose * {
+    color: white !important;
+  }
+  
+  .mail-right .email-content {
+    color: white !important;
+  }
+  
+  .mail-right .email-content * {
+    color: white !important;
+  }
+  
+  .mail-right .email-html-content {
+    color: white !important;
+  }
+  
+  .mail-right .email-html-content * {
+    color: white !important;
+  }
+  
+  .mail-right .email-plain-content {
+    color: white !important;
+  }
+  
+  .mail-right .email-plain-content * {
+    color: white !important;
+  }
+  
+  /* Ensure all text elements are white in dark mode */
+  .mail-right p,
+  .mail-right div,
+  .mail-right span,
+  .mail-right h1,
+  .mail-right h2,
+  .mail-right h3,
+  .mail-right h4,
+  .mail-right h5,
+  .mail-right h6,
+  .mail-right pre,
+  .mail-right code,
+  .mail-right strong,
+  .mail-right em,
+  .mail-right b,
+  .mail-right i,
+  .mail-right a,
+  .mail-right li,
+  .mail-right ul,
+  .mail-right ol {
+    color: white !important;
+  }
+}
+
+/* Global site scaling - AGGRESSIVE FULL WIDTH */
+html {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Ensure the body takes up the full space */
+body {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  height: 100% !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 25 95% 53%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 25 95% 48%;
+    --primary-glow: 25 95% 60%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 25 95% 53%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 25 95% 53%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 25 95% 58%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 25 95% 53%;
+    --primary-glow: 25 95% 65%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 25 95% 58%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 25 95% 58%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  /* Custom component styles - AGGRESSIVE WIDTH */
+  .enterprise-card {
+    @apply bg-card/50 backdrop-blur-sm border border-border/50 rounded-xl shadow-sm;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  .glass-card {
+    @apply bg-card/30 backdrop-blur-md border border-border/30 rounded-xl shadow-lg;
+  }
+
+  .stats-card {
+    @apply hover:shadow-lg transition-all duration-300 hover:scale-[1.01];
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent;
+  }
+
+  .gradient-primary {
+    @apply bg-gradient-to-r from-primary to-primary/80;
+  }
+
+  .gradient-secondary {
+    @apply bg-gradient-to-r from-muted/50 to-muted/30;
+  }
+
+  .gradient-card {
+    @apply bg-gradient-to-br from-card/50 to-card/30;
+  }
+
+  .dropdown-3d {
+    @apply shadow-2xl border border-border/50 backdrop-blur-md;
+  }
+
+  .activity-item {
+    @apply p-3 rounded-lg hover:bg-muted/50 transition-colors;
+  }
+
+  .btn-glow {
+    @apply shadow-lg hover:shadow-xl transition-all duration-300;
+  }
+
+  .shadow-glow {
+    @apply shadow-lg hover:shadow-xl;
+  }
+
+  .btn-3d {
+    @apply transform transition-all duration-200 hover:scale-[1.02] active:scale-[0.98];
+    box-shadow: 
+      0 4px 8px rgba(0, 0, 0, 0.1),
+      0 2px 4px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .btn-3d:hover {
+    box-shadow: 
+      0 8px 16px rgba(0, 0, 0, 0.15),
+      0 4px 8px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-3d:active {
+    box-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.2),
+      inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .orange-glow {
+    box-shadow: 
+      0 0 20px rgba(255, 140, 0, 0.3),
+      0 0 40px rgba(255, 140, 0, 0.1),
+      0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .orange-glow:hover {
+    box-shadow: 
+      0 0 30px rgba(255, 140, 0, 0.4),
+      0 0 60px rgba(255, 140, 0, 0.15),
+      0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .card-3d {
+    @apply transform transition-all duration-300 hover:scale-[1.01];
+    box-shadow: 
+      0 4px 6px rgba(0, 0, 0, 0.05),
+      0 1px 3px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  .card-3d:hover {
+    box-shadow: 
+      0 10px 25px rgba(0, 0, 0, 0.1),
+      0 4px 10px rgba(0, 0, 0, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+
+  .sidebar-collapsed {
+    @apply w-16;
+  }
+
+  .sidebar-expanded {
+    @apply w-64;
+  }
+
+  .module-icon {
+    @apply h-5 w-5;
+  }
+
+  /* AGGRESSIVE FULL WIDTH ENFORCEMENT */
+  #__next,
+  [data-radix-portal],
+  .group\/sidebar-wrapper {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+  }
+
+  main {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Force grid containers to full width */
+  .grid {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  /* Force space-y containers to full width */
+  .space-y-6,
+  .space-y-4,
+  .space-y-8 {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  /* Mail page specific fixes */
+  .h-full.flex {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Ensure all flex-1 elements take full width */
+  .flex-1 {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* AGGRESSIVE ALL PAGES LAYOUT FIXES - 80% SCALE */
+  .mail-page-container,
+  .crm-page-container,
+  .accounting-page-container,
+  .projects-page-container,
+  .notes-page-container,
+  .drive-page-container,
+  .planner-page-container,
+  .calendar-page-container,
+  .dashboard-page-container {
+    display: flex !important;
+    width: 125% !important;
+    max-width: 125% !important;
+    height: 125% !important;
+    gap: 13px !important;
+    transform: scale(0.8) !important;
+    transform-origin: top left !important;
+    /* Ensure container maintains full width after scaling */
+    min-width: 125% !important;
+    box-sizing: border-box !important;
+  }
+
+  .mail-sidebar,
+  .crm-sidebar,
+  .accounting-sidebar,
+  .projects-sidebar,
+  .notes-sidebar,
+  .drive-sidebar,
+  .planner-sidebar,
+  .calendar-sidebar,
+  .dashboard-sidebar {
+    flex-shrink: 0 !important;
+    width: 256px !important;
+    min-width: 256px !important;
+    max-width: 256px !important;
+  }
+
+  .mail-sidebar.collapsed,
+  .crm-sidebar.collapsed,
+  .accounting-sidebar.collapsed,
+  .projects-sidebar.collapsed,
+  .notes-sidebar.collapsed,
+  .drive-sidebar.collapsed,
+  .planner-sidebar.collapsed,
+  .calendar-sidebar.collapsed,
+  .dashboard-sidebar.collapsed {
+    width: 64px !important;
+    min-width: 64px !important;
+    max-width: 64px !important;
+  }
+
+  /* AGGRESSIVE WIDTH REDISTRIBUTION WHEN SIDEBAR COLLAPSES - ALL PAGES */
+  .mail-middle,
+  .crm-middle,
+  .accounting-middle {
+    flex-shrink: 0 !important;
+    width: 400px !important;
+    min-width: 400px !important;
+    max-width: 400px !important;
+    transition: width 0.3s ease !important;
+  }
+  
+  .projects-middle,
+  .projects-page-container .projects-middle,
+  .projects-page-container .enterprise-card.projects-middle,
+  div.projects-middle,
+  div[class*="projects-middle"] {
+    flex-shrink: 0 !important;
+    width: 140px !important;
+    min-width: 140px !important;
+    max-width: 140px !important;
+    transition: width 0.3s ease !important;
+  }
+  
+  .notes-middle,
+  .drive-middle,
+  .planner-middle,
+  .calendar-middle,
+  .dashboard-middle {
+    flex-shrink: 0 !important;
+    width: 400px !important;
+    min-width: 400px !important;
+    max-width: 400px !important;
+    transition: width 0.3s ease !important;
+  }
+
+  /* When sidebar is collapsed, redistribute widths aggressively - ALL PAGES */
+  .mail-page-container:has(.mail-sidebar.collapsed) .mail-middle,
+  .mail-page-container.sidebar-collapsed .mail-middle,
+  .crm-page-container:has(.crm-sidebar.collapsed) .crm-middle,
+  .crm-page-container.sidebar-collapsed .crm-middle,
+  .accounting-page-container:has(.accounting-sidebar.collapsed) .accounting-middle,
+  .accounting-page-container.sidebar-collapsed .accounting-middle,
+  .projects-page-container:has(.projects-sidebar.collapsed) .projects-middle,
+  .projects-page-container.sidebar-collapsed .projects-middle,
+  .notes-page-container:has(.notes-sidebar.collapsed) .notes-middle,
+  .notes-page-container.sidebar-collapsed .notes-middle,
+  .drive-page-container:has(.drive-sidebar.collapsed) .drive-middle,
+  .drive-page-container.sidebar-collapsed .drive-middle,
+  .planner-page-container:has(.planner-sidebar.collapsed) .planner-middle,
+  .planner-page-container.sidebar-collapsed .planner-middle,
+  .calendar-page-container:has(.calendar-sidebar.collapsed) .calendar-middle,
+  .calendar-page-container.sidebar-collapsed .calendar-middle {
+    width: 520px !important; /* 400px + 30% = 520px */
+    min-width: 520px !important;
+    max-width: 520px !important;
+  }
+
+  .mail-right,
+  .crm-right,
+  .accounting-right,
+  .projects-right,
+  .notes-right,
+  .drive-right,
+  .planner-right,
+  .calendar-right,
+  .dashboard-right {
+    flex: 1 1 0 !important;
+    min-width: 300px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    transition: all 0.3s ease !important;
+  }
+
+  /* When sidebar is collapsed, give right panel 40% more space - ALL PAGES */
+  .mail-page-container:has(.mail-sidebar.collapsed) .mail-right,
+  .mail-page-container.sidebar-collapsed .mail-right,
+  .crm-page-container:has(.crm-sidebar.collapsed) .crm-right,
+  .crm-page-container.sidebar-collapsed .crm-right,
+  .accounting-page-container:has(.accounting-sidebar.collapsed) .accounting-right,
+  .accounting-page-container.sidebar-collapsed .accounting-right,
+  .projects-page-container:has(.projects-sidebar.collapsed) .projects-right,
+  .projects-page-container.sidebar-collapsed .projects-right,
+  .notes-page-container:has(.notes-sidebar.collapsed) .notes-right,
+  .notes-page-container.sidebar-collapsed .notes-right,
+  .drive-page-container:has(.drive-sidebar.collapsed) .drive-right,
+  .drive-page-container.sidebar-collapsed .drive-right,
+  .planner-page-container:has(.planner-sidebar.collapsed) .planner-right,
+  .planner-page-container.sidebar-collapsed .planner-right,
+  .calendar-page-container:has(.calendar-sidebar.collapsed) .calendar-right,
+  .calendar-page-container.sidebar-collapsed .calendar-right {
+    flex: 1.4 1 0 !important; /* 40% increase */
+    min-width: 420px !important; /* 300px + 40% = 420px */
+  }
+
+  /* AGGRESSIVE SCROLL BARS FOR ALL MAIL PAGE PANELS */
+  .mail-sidebar,
+  .mail-middle,
+  .mail-right {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    max-height: 100vh !important;
+    height: 100vh !important;
+  }
+
+  .mail-sidebar::-webkit-scrollbar,
+  .mail-middle::-webkit-scrollbar,
+  .mail-right::-webkit-scrollbar {
+    width: 6px !important;
+  }
+
+  .mail-sidebar::-webkit-scrollbar-track,
+  .mail-middle::-webkit-scrollbar-track,
+  .mail-right::-webkit-scrollbar-track {
+    background: transparent !important;
+  }
+
+  .mail-sidebar::-webkit-scrollbar-thumb,
+  .mail-middle::-webkit-scrollbar-thumb,
+  .mail-right::-webkit-scrollbar-thumb {
+    background: #cbd5e1 !important;
+    border-radius: 3px !important;
+  }
+
+  .mail-sidebar::-webkit-scrollbar-thumb:hover,
+  .mail-middle::-webkit-scrollbar-thumb:hover,
+  .mail-right::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8 !important;
+  }
+
+  /* Force all panels to fit properly at bottom */
+  .mail-page-container {
+    height: 100vh !important;
+    max-height: 100vh !important;
+    overflow: hidden !important;
+    width: 100% !important;
+    display: flex !important;
+  }
+
+  .mail-sidebar,
+  .mail-middle,
+  .mail-right {
+    flex-shrink: 0 !important;
+    min-height: 0 !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+  }
+
+  /* Force scroll areas to have proper height */
+  .mail-sidebar .space-y-4 {
+    min-height: 100% !important;
+  }
+
+  .mail-middle .space-y-1 {
+    min-height: 100% !important;
+  }
+
+  .mail-right .prose {
+    min-height: 100% !important;
+  }
+
+  /* Email content styling - AGGRESSIVE ANTI-BLUR */
+  .email-content {
+    @apply text-foreground;
+    position: relative !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
+    user-select: text !important;
+    overflow: hidden !important;
+    /* Completely disable all visual effects */
+    backdrop-filter: none !important;
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  
+  /* Completely prevent any overlays, blur effects, or problematic elements */
+  .email-content * {
+    position: relative !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    /* Disable any hover effects */
+    :hover {
+      backdrop-filter: none !important;
+      filter: none !important;
+      transform: none !important;
+      transition: none !important;
+      animation: none !important;
+      box-shadow: none !important;
+      text-shadow: none !important;
+    }
+  }
+  
+  /* Hide any problematic elements */
+  .email-content div[style*="position: fixed"],
+  .email-content div[style*="z-index"],
+  .email-content div[class*="overlay"],
+  .email-content div[class*="blur"],
+  .email-content div[style*="backdrop-filter"],
+  .email-content div[style*="filter"],
+  .email-content img,
+  .email-content iframe,
+  .email-content object,
+  .email-content embed,
+  .email-content form,
+  .email-content input,
+  .email-content button {
+    display: none !important;
+  }
+  
+/* Email content styling - Safe HTML and Plain Text */
+.email-content {
+  position: relative !important;
+  z-index: 1 !important;
+  pointer-events: auto !important;
+  /* Completely disable all visual effects */
+  backdrop-filter: none !important;
+  filter: none !important;
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  /* Make content readable */
+  line-height: 1.6 !important;
+  font-size: 14px !important;
+  color: #374151 !important;
+  padding: 0 !important;
+  /* ULTRA AGGRESSIVE - Prevent horizontal overflow */
+  max-width: 100% !important;
+  width: 100% !important;
+  overflow-x: hidden !important;
+  overflow-y: visible !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  word-break: break-all !important;
+  box-sizing: border-box !important;
+  contain: layout !important;
+}
+
+/* Safe HTML email content styling */
+.email-html-content {
+  /* Safe HTML rendering with security restrictions */
+  position: relative !important;
+  z-index: 1 !important;
+  pointer-events: auto !important;
+  /* Disable all visual effects */
+  backdrop-filter: none !important;
+  filter: none !important;
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  /* Typography */
+  line-height: 1.6 !important;
+  font-size: 14px !important;
+  color: #374151 !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  /* Better spacing and formatting */
+  white-space: normal !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  word-break: break-all !important;
+  /* ULTRA AGGRESSIVE - Prevent horizontal overflow */
+  max-width: 100% !important;
+  width: 100% !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+  contain: layout !important;
+  display: block !important;
+}
+
+/* Ensure all child elements respect width constraints - ULTRA AGGRESSIVE */
+.email-html-content *,
+.email-html-content div,
+.email-html-content span,
+.email-html-content p,
+.email-html-content a,
+.email-html-content strong,
+.email-html-content em,
+.email-html-content b,
+.email-html-content i {
+  max-width: 100% !important;
+  width: auto !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+  box-sizing: border-box !important;
+  overflow-x: hidden !important;
+}
+
+/* Force font styles to inherit and break properly */
+.email-html-content .font,
+.email-html-content .size,
+.email-html-content .colour,
+.email-html-content [style*="font-family"],
+.email-html-content [style*="font-size"],
+.email-html-content [style*="color"] {
+  max-width: 100% !important;
+  width: auto !important;
+  display: inline !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+/* Security restrictions for HTML content */
+.email-html-content * {
+  /* Disable all visual effects on child elements */
+  backdrop-filter: none !important;
+  filter: none !important;
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  /* Remove dangerous elements */
+  position: static !important;
+  z-index: auto !important;
+}
+
+/* Hide dangerous elements in HTML emails */
+.email-html-content script,
+.email-html-content iframe,
+.email-html-content object,
+.email-html-content embed,
+.email-html-content form,
+.email-html-content input,
+.email-html-content button,
+.email-html-content [onclick],
+.email-html-content [onload],
+.email-html-content [onerror] {
+  display: none !important;
+}
+
+/* Allow and style images in emails */
+.email-html-content img {
+  max-width: 100% !important;
+  width: auto !important;
+  height: auto !important;
+  display: block !important;
+  margin: 0.5em 0 !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+  object-fit: contain !important;
+}
+
+/* Style safe HTML elements */
+.email-html-content h1,
+.email-html-content h2,
+.email-html-content h3,
+.email-html-content h4,
+.email-html-content h5,
+.email-html-content h6 {
+  font-weight: 600 !important;
+  margin: 1em 0 0.5em 0 !important;
+  color: #111827 !important;
+}
+
+.email-html-content p {
+  margin: 0.5em 0 !important;
+  line-height: 1.6 !important;
+}
+
+.email-html-content a {
+  color: #2563eb !important;
+  text-decoration: underline !important;
+  cursor: pointer !important;
+}
+
+.email-html-content a:hover {
+  color: #1d4ed8 !important;
+}
+
+.email-html-content ul,
+.email-html-content ol {
+  margin: 0.5em 0 !important;
+  padding-left: 1.5em !important;
+}
+
+.email-html-content li {
+  margin: 0.25em 0 !important;
+}
+
+.email-html-content blockquote {
+  border-left: 4px solid #e5e7eb !important;
+  padding-left: 1em !important;
+  margin: 1em 0 !important;
+  font-style: italic !important;
+  color: #6b7280 !important;
+}
+
+.email-html-content code {
+  background: #f3f4f6 !important;
+  padding: 0.125em 0.25em !important;
+  border-radius: 0.25em !important;
+  font-family: 'Courier New', monospace !important;
+  font-size: 0.875em !important;
+}
+
+.email-html-content pre {
+  background: #f3f4f6 !important;
+  padding: 1em !important;
+  border-radius: 0.5em !important;
+  overflow-x: auto !important;
+  font-family: 'Courier New', monospace !important;
+  font-size: 0.875em !important;
+  margin: 1em 0 !important;
+}
+
+.email-html-content table {
+  border-collapse: collapse !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 1em 0 !important;
+  display: block !important;
+  overflow-x: auto !important;
+  table-layout: auto !important;
+  word-wrap: break-word !important;
+}
+
+.email-html-content tbody,
+.email-html-content tr,
+.email-html-content td {
+  max-width: 100% !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+.email-html-content th,
+.email-html-content td {
+  border: 1px solid #e5e7eb !important;
+  padding: 0.5em !important;
+  text-align: left !important;
+}
+
+.email-html-content th {
+  background: #f9fafb !important;
+  font-weight: 600 !important;
+}
+
+/* Plain email content styling - AGGRESSIVE ANTI-BLUR + READABLE */
+.email-content-plain {
+  position: relative !important;
+  z-index: 1 !important;
+  pointer-events: auto !important;
+  /* Completely disable all visual effects */
+  backdrop-filter: none !important;
+  filter: none !important;
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  /* Make content readable */
+  line-height: 1.6 !important;
+  font-size: 14px !important;
+  color: #374151 !important;
+  background: #ffffff !important;
+  padding: 20px !important;
+  border-radius: 8px !important;
+  border: 1px solid #e5e7eb !important;
+}
+  
+  /* Prevent any parent elements from causing blur */
+  .email-content-plain * {
+    backdrop-filter: none !important;
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  
+  /* Make email content more readable */
+  .email-content-plain .prose {
+    max-width: none !important;
+    color: #374151 !important;
+  }
+  
+  .email-content-plain .prose div {
+    white-space: pre-line !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    line-height: 1.6 !important;
+    font-size: 14px !important;
+    color: #374151 !important;
+  }
+
+  .email-content a {
+    @apply text-primary hover:underline cursor-pointer;
+  }
+
+  .email-content a[data-original-href] {
+    @apply text-blue-600 hover:text-blue-800;
+  }
+
+  .email-content a[data-original-href]:hover::after {
+    content: " (External link - click to copy)";
+    @apply text-xs text-muted-foreground ml-1;
+  }
+
+  .email-content h1,
+  .email-content h2,
+  .email-content h3,
+  .email-content h4,
+  .email-content h5,
+  .email-content h6 {
+    @apply font-semibold text-foreground mb-2;
+  }
+
+  .email-content p {
+    @apply mb-3 leading-relaxed;
+  }
+
+  .email-content ul,
+  .email-content ol {
+    @apply mb-3 pl-6;
+  }
+
+  .email-content li {
+    @apply mb-1;
+  }
+
+  .email-content blockquote {
+    @apply border-l-4 border-muted pl-4 italic text-muted-foreground;
+  }
+
+  .email-content a {
+    @apply text-primary hover:underline;
+  }
+
+  .email-content table {
+    @apply w-full border-collapse border border-border;
+  }
+
+  .email-content th,
+  .email-content td {
+    @apply border border-border p-2 text-left;
+  }
+
+  .email-content th {
+    @apply bg-muted font-semibold;
+  }
+
+  /* Thread indicators */
+  .thread-expanded {
+    @apply border-l-2 border-primary;
+  }
+
+  .thread-collapsed {
+    @apply border-l-2 border-transparent;
+  }
+  
+}
+
+/* NUCLEAR OPTION - FORCE PROJECTS MIDDLE WIDTH */
+html body .projects-page-container .projects-middle,
+html body .projects-page-container .enterprise-card.projects-middle,
+html body .projects-page-container div.projects-middle,
+html body div[class*="projects-middle"],
+html body .projects-middle[class*="enterprise-card"],
+html body .projects-middle[class*="card-3d"],
+html body div[data-panel="projects-middle"],
+html body .projects-page-container div[data-panel="projects-middle"],
+.projects-page-container .projects-middle,
+.projects-page-container .enterprise-card.projects-middle,
+.projects-page-container div.projects-middle,
+div[class*="projects-middle"],
+.projects-middle[class*="enterprise-card"],
+.projects-middle[class*="card-3d"],
+div[data-panel="projects-middle"],
+.projects-page-container div[data-panel="projects-middle"] {
+  width: 168px !important;
+  min-width: 168px !important;
+  max-width: 168px !important;
+  flex-shrink: 0 !important;
+  transition: width 0.3s ease !important;
+}
+
+/* ULTRA SPECIFIC OVERRIDE */
+div.projects-middle.enterprise-card.card-3d.flex.flex-col.flex-shrink-0 {
+  width: 168px !important;
+  min-width: 168px !important;
+  max-width: 168px !important;
+  flex-shrink: 0 !important;
+}
+
+/* ID-BASED OVERRIDE - HIGHEST SPECIFICITY */
+#projects-middle-panel {
+  width: 168px !important;
+  min-width: 168px !important;
+  max-width: 168px !important;
+  flex-shrink: 0 !important;
+}
+
+/* AGGRESSIVE OVERRIDE FOR PROJECTS SIDEBAR - HIGHEST PRIORITY */
+.projects-page-container .projects-sidebar,
+.projects-page-container .enterprise-card.projects-sidebar,
+.projects-page-container div.projects-sidebar,
+div[class*="projects-sidebar"],
+.projects-sidebar[class*="enterprise-card"],
+.projects-sidebar[class*="card-3d"],
+div[data-panel="projects-sidebar"],
+.projects-page-container div[data-panel="projects-sidebar"],
+#projects-sidebar-panel {
+  width: 154px !important;
+  min-width: 154px !important;
+  max-width: 154px !important;
+  flex-shrink: 0 !important;
+}
+
+/* CSS VARIABLE OVERRIDE */
+.projects-page-container {
+  --projects-middle-width: 168px !important;
+}
+
+.projects-page-container .projects-middle {
+  width: var(--projects-middle-width) !important;
+  min-width: var(--projects-middle-width) !important;
+  max-width: var(--projects-middle-width) !important;
+}
+
+/* NUCLEAR OPTION - FORCE PROJECTS SIDEBAR WIDTH */
+html body .projects-page-container .projects-sidebar,
+html body .projects-page-container .enterprise-card.projects-sidebar,
+html body .projects-page-container div.projects-sidebar,
+html body div[class*="projects-sidebar"],
+html body .projects-sidebar[class*="enterprise-card"],
+html body .projects-sidebar[class*="card-3d"],
+html body div[data-panel="projects-sidebar"],
+html body .projects-page-container div[data-panel="projects-sidebar"],
+.projects-page-container .projects-sidebar,
+.projects-page-container .enterprise-card.projects-sidebar,
+.projects-page-container div.projects-sidebar,
+div[class*="projects-sidebar"],
+.projects-sidebar[class*="enterprise-card"],
+.projects-sidebar[class*="card-3d"],
+div[data-panel="projects-sidebar"],
+.projects-page-container div[data-panel="projects-sidebar"] {
+  width: 154px !important;
+  min-width: 154px !important;
+  max-width: 154px !important;
+  flex-shrink: 0 !important;
+  transition: width 0.3s ease !important;
+}
+
+/* ULTRA SPECIFIC OVERRIDE FOR SIDEBAR */
+div.projects-sidebar.enterprise-card.card-3d.flex-shrink-0 {
+  width: 154px !important;
+  min-width: 154px !important;
+  max-width: 154px !important;
+  flex-shrink: 0 !important;
+}
+
+/* AGGRESSIVE NOTES PAGE WIDTH OVERRIDES */
+.notes-page-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 100% !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: stretch !important;
+}
+
+.notes-left-panel {
+  width: 192px !important;
+  min-width: 192px !important;
+  max-width: 192px !important;
+  flex-shrink: 0 !important;
+}
+
+.notes-middle-panel {
+  width: 307px !important;
+  min-width: 307px !important;
+  max-width: 307px !important;
+  flex-shrink: 0 !important;
+}
+
+.notes-right-panel {
+  flex: none !important;
+  min-width: 0 !important;
+  width: auto !important;
+  max-width: none !important;
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+  flex-basis: auto !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* ULTRA-AGGRESSIVE NOTES PAGE OVERRIDES */
+html body .notes-page-container,
+div[class*="notes-page-container"],
+div[data-page="notes"] {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 100% !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: stretch !important;
+}
+
+html body .notes-left-panel,
+div[class*="notes-left-panel"] {
+  width: 192px !important;
+  min-width: 192px !important;
+  max-width: 192px !important;
+  flex-shrink: 0 !important;
+}
+
+html body .notes-middle-panel,
+div[class*="notes-middle-panel"] {
+  width: 307px !important;
+  min-width: 307px !important;
+  max-width: 307px !important;
+  flex-shrink: 0 !important;
+}
+
+html body .notes-right-panel,
+div[class*="notes-right-panel"] {
+  flex: none !important;
+  min-width: 0 !important;
+  width: auto !important;
+  max-width: none !important;
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+  flex-basis: auto !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* NUCLEAR OPTION - FORCE NOTES PAGE WIDTH */
+html body .notes-page-container,
+html body div[class*="notes-page-container"],
+html body div[data-page="notes"],
+.notes-page-container,
+div[class*="notes-page-container"],
+div[data-page="notes"] {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 100% !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: stretch !important;
+  transition: width 0.3s ease !important;
+}
+
+/* ULTRA SPECIFIC OVERRIDE FOR NOTES PANELS */
+div.notes-left-panel.w-48.border-r.p-3.space-y-3,
+div.notes-middle-panel.w-80.border-r.flex.flex-col,
+div.notes-right-panel.flex-1.flex.flex-col {
+  width: 192px !important;
+  min-width: 192px !important;
+  max-width: 192px !important;
+  flex-shrink: 0 !important;
+}
+
+div.notes-middle-panel.w-80.border-r.flex.flex-col {
+  width: 307px !important;
+  min-width: 307px !important;
+  max-width: 307px !important;
+  flex-shrink: 0 !important;
+}
+
+div.notes-right-panel.flex-1.flex.flex-col {
+  flex: none !important;
+  min-width: 0 !important;
+  width: auto !important;
+  max-width: none !important;
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+  flex-basis: auto !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* ID-BASED OVERRIDES FOR NOTES PAGE - HIGHEST SPECIFICITY */
+#notes-page-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 100% !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: stretch !important;
+}
+
+#notes-left-panel {
+  width: 192px !important;
+  min-width: 192px !important;
+  max-width: 192px !important;
+  flex-shrink: 0 !important;
+}
+
+#notes-middle-panel {
+  width: 307px !important;
+  min-width: 307px !important;
+  max-width: 307px !important;
+  flex-shrink: 0 !important;
+}
+
+#notes-right-panel {
+  flex: none !important;
+  min-width: 0 !important;
+  width: auto !important;
+  max-width: none !important;
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+  flex-basis: auto !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* DATA ATTRIBUTE OVERRIDES */
+div[data-page="notes"] {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 100% !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: stretch !important;
+}
+
+div[data-panel="notes-left"] {
+  width: 192px !important;
+  min-width: 192px !important;
+  max-width: 192px !important;
+  flex-shrink: 0 !important;
+}
+
+div[data-panel="notes-middle"] {
+  width: 307px !important;
+  min-width: 307px !important;
+  max-width: 307px !important;
+  flex-shrink: 0 !important;
+}
+
+div[data-panel="notes-right"] {
+  flex: none !important;
+  min-width: 0 !important;
+  width: auto !important;
+  max-width: none !important;
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+  flex-basis: auto !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* ULTRA-AGGRESSIVE RIGHT PANEL OVERRIDES */
+html body .notes-page-container .notes-right-panel,
+html body .notes-page-container #notes-right-panel,
+html body .notes-page-container div[data-panel="notes-right"],
+html body div[class*="notes-right-panel"],
+html body div[data-panel="notes-right"],
+.notes-page-container .notes-right-panel,
+.notes-page-container #notes-right-panel,
+.notes-page-container div[data-panel="notes-right"],
+div[class*="notes-right-panel"],
+div[data-panel="notes-right"] {
+  flex: none !important;
+  min-width: 0 !important;
+  width: auto !important;
+  max-width: none !important;
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+  flex-basis: auto !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* NUCLEAR OPTION - FORCE RIGHT PANEL TO STRETCH HORIZONTALLY */
+html body .notes-page-container .notes-right-panel.flex-1.flex.flex-col,
+html body .notes-page-container #notes-right-panel.flex-1.flex.flex-col,
+html body .notes-page-container div[data-panel="notes-right"].flex-1.flex.flex-col,
+.notes-page-container .notes-right-panel.flex-1.flex.flex-col,
+.notes-page-container #notes-right-panel.flex-1.flex.flex-col,
+.notes-page-container div[data-panel="notes-right"].flex-1.flex.flex-col {
+  flex: none !important;
+  min-width: 0 !important;
+  width: auto !important;
+  max-width: none !important;
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+  flex-basis: auto !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: width 0.3s ease !important;
+}
+
+/* ULTRA NUCLEAR - FORCE LAST CHILD TO STRETCH */
+html body .notes-page-container > div:last-child,
+.notes-page-container > div:last-child,
+div[data-page="notes"] > div:last-child {
+  flex: none !important;
+  min-width: 0 !important;
+  width: auto !important;
+  max-width: none !important;
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+  flex-basis: auto !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* MAXIMUM SPECIFICITY OVERRIDE */
+html body div.notes-page-container div.notes-right-panel.flex-1.flex.flex-col,
+html body div.notes-page-container div#notes-right-panel.flex-1.flex.flex-col,
+html body div.notes-page-container div[data-panel="notes-right"].flex-1.flex.flex-col {
+  flex: none !important;
+  min-width: 0 !important;
+  width: auto !important;
+  max-width: none !important;
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+  flex-basis: auto !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* TOP BAR OVERLAP FIX - ULTRA AGGRESSIVE OVERRIDE */
+html body main,
+main,
+.flex-1.bg-gradient-to-br {
+  padding-top: 4rem !important;
+  margin-top: 0 !important;
+  position: relative !important;
+  top: 0 !important;
+  z-index: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* LEFT NAVIGATION BAR OVERLAP FIX */
+html body main,
+main,
+.flex-1.bg-gradient-to-br {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  position: relative !important;
+  left: 0 !important;
+  z-index: 1 !important;
+}
+
+/* CONNECT PAGE SPECIFIC OVERRIDE - NUCLEAR OPTION */
+html body .connect-page-container,
+.connect-page-container,
+div.connect-page-container,
+[class*="connect-page-container"] {
+  padding-top: 4rem !important;
+  margin-top: 0 !important;
+  position: relative !important;
+  top: 0 !important;
+  z-index: 10 !important;
+  transform: translateY(0) !important;
+  min-height: calc(100vh - 6rem) !important;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  left: 0 !important;
+}
+
+/* CONNECT PAGE PANELS OVERRIDE - MAXIMUM SPECIFICITY */
+html body .connect-page-container .connect-left-panel,
+html body .connect-page-container .connect-right-panel,
+.connect-page-container .connect-left-panel,
+.connect-page-container .connect-right-panel,
+div.connect-page-container div.connect-left-panel,
+div.connect-page-container div.connect-right-panel,
+[class*="connect-page-container"] [class*="connect-left-panel"],
+[class*="connect-page-container"] [class*="connect-right-panel"] {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  position: relative !important;
+  top: 0 !important;
+  z-index: 11 !important;
+  transform: translateY(0) !important;
+}
+
+/* CONNECT LEFT PANEL HEADER OVERRIDE - FORCE VISIBILITY */
+html body .connect-left-panel > div:first-child,
+.connect-left-panel > div:first-child,
+div.connect-left-panel > div:first-child,
+[class*="connect-left-panel"] > div:first-child {
+  padding-top: 4rem !important;
+  margin-top: 0 !important;
+  position: relative !important;
+  top: 0 !important;
+  z-index: 12 !important;
+  transform: translateY(0) !important;
+}
+
+/* CALENDAR PAGE - BRIDGE GAP TO TOP BAR */
+html body main[style*="paddingTop: 0"] {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+html body [data-page="calendar"] {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* ULTRA AGGRESSIVE CALENDAR POSITIONING - MAXIMUM FORCE */
+html body main {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+  position: relative !important;
+  top: 0 !important;
+  z-index: 10 !important;
+  transform: translateY(0) !important;
+}
+
+html body main[style*="paddingTop"],
+html body main[style*="padding-top"],
+html body main[style*="10rem"] {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+  position: relative !important;
+  top: 0 !important;
+  z-index: 10 !important;
+  transform: translateY(0) !important;
+}
+
+html body main > div[data-page="calendar"] {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  position: relative !important;
+  top: 0 !important;
+  z-index: 15 !important;
+  transform: translateY(0) !important;
+}
+
+html body [data-page="calendar"] {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  position: relative !important;
+  top: 0 !important;
+  z-index: 15 !important;
+  transform: translateY(0) !important;
+}
+
+/* NUCLEAR OVERRIDE - FORCE ALL MAIN ELEMENTS */
+html body main,
+html body main[style],
+html body main[style*="paddingTop"],
+html body main[style*="padding-top"] {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+  position: relative !important;
+  top: 0 !important;
+  z-index: 10 !important;
+  transform: translateY(0) !important;
+  padding: 0 !important;
+}
+
+/* ELIMINATE ALL GAPS - CALENDAR PAGE */
+html body main:has([data-page="calendar"]) {
+  padding: 0 !important;
+  margin: 0 !important;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+html body [data-page="calendar"] {
+  margin: 0 !important;
+  padding: 0 !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+html body [data-page="calendar"] .enterprise-card {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  border-top: none !important;
+  border-radius: 0 !important;
+  position: relative !important;
+  top: 0 !important;
+  z-index: 16 !important;
+  transform: translateY(0) !important;
+}
+
+/* FORCE CALENDAR PANEL TO TOUCH TOP BAR */
+html body main:has([data-page="calendar"]) {
+  padding: 0 !important;
+  margin: 0 !important;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+  position: relative !important;
+  top: 0 !important;
+  z-index: 10 !important;
+  transform: translateY(0) !important;
+}
+
+html body [data-page="calendar"] {
+  margin: 0 !important;
+  padding: 0 !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  position: relative !important;
+  top: 0 !important;
+  z-index: 15 !important;
+  transform: translateY(0) !important;
+}
+
+/* ULTRA AGGRESSIVE - FORCE MAIN ELEMENT TO TOP */
+html body main[style*="paddingTop: 0"] {
+  padding: 0 !important;
+  margin: 0 !important;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+  position: relative !important;
+  top: 0 !important;
+  z-index: 10 !important;
+  transform: translateY(0) !important;
+}
+
+
+/* ULTRA NUCLEAR - FORCE CONNECT PAGE POSITIONING */
+html body div[class*="connect"],
+html body div[data-page="connect"],
+html body main > div[class*="connect"],
+main > div[class*="connect"] {
+  padding-top: 4rem !important;
+  margin-top: 0 !important;
+  position: relative !important;
+  top: 0 !important;
+  z-index: 10 !important;
+  transform: translateY(0) !important;
+}
+
+/* MAXIMUM SPECIFICITY OVERRIDE FOR MAIN LAYOUT */
+html body div.flex-1.flex.flex-col.min-w-0 main,
+html body div[class*="flex-1"][class*="flex"][class*="flex-col"] main,
+.flex-1.flex.flex-col.min-w-0 main {
+  padding-top: 4rem !important;
+  margin-top: 0 !important;
+  position: relative !important;
+  top: 0 !important;
+  z-index: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* ULTRA NUCLEAR - FORCE CONNECT PAGE NO OVERLAP */
+html body div[class*="connect"] {
+  padding-top: 4rem !important;
+  margin-top: 0 !important;
+  position: relative !important;
+  top: 0 !important;
+  z-index: 10 !important;
+  transform: translateY(0) !important;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  left: 0 !important;
+}
+
+/* MAXIMUM FORCE - ALL CONNECT ELEMENTS */
+html body main > div[class*="connect"],
+html body div[class*="connect-page"],
+html body div[class*="connect"] {
+  padding-top: 4rem !important;
+  margin-top: 0 !important;
+  position: relative !important;
+  top: 0 !important;
+  z-index: 10 !important;
+  transform: translateY(0) !important;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  left: 0 !important;
+}
+
+/* FIX GAP BETWEEN TOP BAR AND ALL PAGES */
+html body main {
+  padding-top: 4rem !important; /* 64px for top navigation */
+  margin-top: 0 !important;
+}
+
+/* FORCE ALL PAGES TO TOUCH TOP BAR */
+html body main > div:first-child {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* SPECIFIC PAGE OVERRIDES */
+html body [data-page="calendar"] {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+html body [data-page="connect"] {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+html body [data-page="mail"] {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+html body [data-page="projects"] {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+html body [data-page="notes"] {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+html body [data-page="crm"] {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+html body [data-page="accounting"] {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+html body [data-page="drive"] {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* ULTIMATE OVERRIDE - FORCE ALL MAIN ELEMENTS */
+html body main,
+main,
+.flex-1.flex.flex-col.min-w-0 main,
+div.flex-1.flex.flex-col.min-w-0 main {
+  padding-top: 4rem !important;
+  margin-top: 0 !important;
+}

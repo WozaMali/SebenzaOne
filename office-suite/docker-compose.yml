@@ -1,0 +1,104 @@
+version: '3.8'
+
+services:
+  # Local Supabase Database
+  db:
+    image: supabase/postgres:15.1.0.117
+    container_name: sebenza-db
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: your-super-secret-password
+      POSTGRES_DB: sebenza_suite
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # Local Supabase API
+  api:
+    image: supabase/gotrue:v2.99.0
+    container_name: sebenza-api
+    restart: unless-stopped
+    ports:
+      - "9999:9999"
+    environment:
+      GOTRUE_API_HOST: 0.0.0.0
+      GOTRUE_API_PORT: 9999
+      API_EXTERNAL_URL: http://localhost:9999
+      GOTRUE_DB_DRIVER: postgres
+      GOTRUE_DB_DATABASE_URL: postgres://postgres:your-super-secret-password@db:5432/sebenza_suite
+      GOTRUE_SITE_URL: http://localhost:3000
+      GOTRUE_URI_ALLOW_LIST: "*"
+      GOTRUE_DISABLE_SIGNUP: false
+      GOTRUE_JWT_SECRET: your-super-secret-jwt-token
+      GOTRUE_JWT_EXP: 3600
+      GOTRUE_JWT_DEFAULT_GROUP_NAME: authenticated
+      GOTRUE_JWT_ADMIN_ROLES: service_role
+      GOTRUE_JWT_AUD: authenticated
+      GOTRUE_JWT_ISSUER: sebenza-suite
+      GOTRUE_EXTERNAL_EMAIL_ENABLED: true
+      GOTRUE_MAILER_AUTOCONFIRM: true
+      GOTRUE_SMTP_ADMIN_EMAIL: admin@sebenza-suite.local
+      GOTRUE_SMTP_HOST: localhost
+      GOTRUE_SMTP_PORT: 587
+      GOTRUE_SMTP_USER: your-email@example.com
+      GOTRUE_SMTP_PASS: your-email-password
+      GOTRUE_SMTP_SENDER_NAME: Sebenza Suite
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # Local Storage
+  storage:
+    image: supabase/storage-api:v0.40.4
+    container_name: sebenza-storage
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      ANON_KEY: your-anon-key
+      SERVICE_KEY: your-service-key
+      POSTGREST_URL: http://api:9999
+      PGRST_JWT_SECRET: your-super-secret-jwt-token
+      DATABASE_URL: postgres://postgres:your-super-secret-password@db:5432/sebenza_suite
+      FILE_SIZE_LIMIT: 52428800
+      STORAGE_BACKEND: file
+      FILE_STORAGE_BACKEND_PATH: /var/lib/storage
+      TENANT_ID: sebenza-suite
+      REGION: local
+      GLOBAL_S3_BUCKET: sebenza-suite
+    volumes:
+      - ./data/storage:/var/lib/storage
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # Redis for caching
+  redis:
+    image: redis:7-alpine
+    container_name: sebenza-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./data/redis:/data
+
+  # Adminer (Database Management UI)
+  adminer:
+    image: adminer
+    container_name: sebenza-adminer
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
+  redis_data:
+  storage_data:

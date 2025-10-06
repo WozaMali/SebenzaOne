@@ -1,73 +1,230 @@
-# Welcome to your Lovable project
+# Sebenza Waste Suite
 
-## Project info
+A comprehensive business suite consisting of a landing page and office productivity applications for waste management services.
 
-**URL**: https://lovable.dev/projects/a2ece35c-b2ea-48b5-aae8-7e3e82b1f226
+## 🌐 Live Applications
 
-## How can I edit this code?
+- **Landing Page**: [sebenzawaste.co.za](https://sebenzawaste.co.za)
+- **Office Suite**: [office.sebenzawaste.co.za](https://office.sebenzawaste.co.za)
 
-There are several ways of editing your application.
+## 📁 Project Structure
 
-**Use Lovable**
+```
+sebenza-waste-suite/
+├── landing-site/          # Landing page (Vite + React + TypeScript)
+│   ├── src/
+│   ├── public/
+│   └── package.json
+├── office-suite/          # Office productivity suite (Next.js + React + TypeScript)
+│   ├── app/
+│   ├── src/
+│   └── package.json
+├── package.json           # Root package.json for monorepo management
+├── .gitignore
+└── README.md
+```
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/a2ece35c-b2ea-48b5-aae8-7e3e82b1f226) and start prompting.
+## 🚀 Quick Start
 
-Changes made via Lovable will be committed automatically to this repo.
+### Prerequisites
 
-**Use your preferred IDE**
+- Node.js 18+ 
+- npm or yarn
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Installation
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/sebenza-waste-suite.git
+cd sebenza-waste-suite
+```
 
-Follow these steps:
+2. Install all dependencies:
+```bash
+npm run install:all
+```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Development
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+Start both applications in development mode:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Or start them individually:
+```bash
+# Landing site only (http://localhost:8080)
+npm run dev:landing
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+# Office suite only (http://localhost:3001)
+npm run dev:office
+```
 
-**Use GitHub Codespaces**
+### Production Build
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Build both applications:
+```bash
+npm run build
+```
 
-## What technologies are used for this project?
+Or build individually:
+```bash
+npm run build:landing
+npm run build:office
+```
 
-This project is built with:
+## 🛠️ Available Scripts
 
+### Root Level Commands
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start both applications in development mode |
+| `npm run build` | Build both applications for production |
+| `npm run start` | Start both applications in production mode |
+| `npm run install:all` | Install dependencies for all applications |
+| `npm run clean` | Clean build artifacts from all applications |
+| `npm run lint` | Run linting for all applications |
+
+### Individual Application Commands
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev:landing` | Start landing site development server |
+| `npm run dev:office` | Start office suite development server |
+| `npm run build:landing` | Build landing site for production |
+| `npm run build:office` | Build office suite for production |
+| `npm run start:landing` | Start landing site production server |
+| `npm run start:office` | Start office suite production server |
+
+## 🏗️ Applications
+
+### Landing Site (`landing-site/`)
+
+**Technology Stack:**
 - Vite
+- React 18
 - TypeScript
-- React
-- shadcn-ui
 - Tailwind CSS
+- Radix UI Components
 
-## How can I deploy this project?
+**Features:**
+- Modern, responsive design
+- SEO optimized
+- Fast loading times
+- Mobile-first approach
 
-Simply open [Lovable](https://lovable.dev/projects/a2ece35c-b2ea-48b5-aae8-7e3e82b1f226) and click on Share -> Publish.
+**Development:**
+```bash
+cd landing-site
+npm run dev
+```
 
-## Can I connect a custom domain to my Lovable project?
+### Office Suite (`office-suite/`)
 
-Yes, you can!
+**Technology Stack:**
+- Next.js 15
+- React 18
+- TypeScript
+- Tailwind CSS
+- Supabase (Database & Auth)
+- AWS SES (Email)
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+**Features:**
+- Email management
+- Project management
+- CRM system
+- File storage
+- Calendar integration
+- Notes and planning tools
+- Real-time collaboration
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+**Development:**
+```bash
+cd office-suite
+npm run dev
+```
+
+## 🔧 Configuration
+
+### Environment Variables
+
+Each application has its own environment configuration:
+
+#### Landing Site
+- `.env.development` - Development settings
+- `.env.production` - Production settings
+
+#### Office Suite
+- `.env.local` - Local development settings
+- `.env.production` - Production settings
+
+### Domain Configuration
+
+- **Landing Site**: `sebenzawaste.co.za`
+- **Office Suite**: `office.sebenzawaste.co.za`
+
+Both applications are configured for cross-domain communication and can link to each other seamlessly.
+
+## 🚀 Deployment
+
+### DNS Configuration
+
+Configure your DNS records:
+
+```
+sebenzawaste.co.za          A    YOUR_SERVER_IP
+office.sebenzawaste.co.za   A    YOUR_SERVER_IP
+```
+
+### Deployment Steps
+
+1. **Build Applications:**
+   ```bash
+   npm run build
+   ```
+
+2. **Deploy Landing Site:**
+   - Upload `landing-site/dist/` to your web server
+   - Configure web server to serve static files
+
+3. **Deploy Office Suite:**
+   - Upload `office-suite/.next/` to your Node.js server
+   - Configure environment variables
+   - Start the application
+
+### Environment Setup
+
+Ensure production environment variables are configured:
+
+- Supabase credentials
+- AWS credentials (for email services)
+- Domain configurations
+- SSL certificates
+
+## 📚 Documentation
+
+- [Deployment Guide](DEPLOYMENT.md)
+- [Domain Configuration](DOMAIN_CONFIGURATION.md)
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/new-feature`
+3. Commit changes: `git commit -am 'Add new feature'`
+4. Push to branch: `git push origin feature/new-feature`
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🆘 Support
+
+For support and questions:
+- Create an issue in this repository
+- Contact the development team
+
+## 🔄 Version History
+
+- **v1.0.0** - Initial release with landing page and office suite
