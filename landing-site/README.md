@@ -1,73 +1,127 @@
-# Welcome to your Lovable project
+# Sebenza Waste Landing Site
 
-## Project info
+A modern, responsive landing page for Sebenza Nathi Waste Group's recycling rewards program.
 
-**URL**: https://lovable.dev/projects/61259901-8be8-4a82-a3cf-dceaa641b9b3
+## 🌐 Live Site
 
-## How can I edit this code?
+**URL**: [sebenzawaste.co.za](https://sebenzawaste.co.za)
 
-There are several ways of editing your application.
+## 🚀 Quick Start
 
-**Use Lovable**
+### Prerequisites
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/61259901-8be8-4a82-a3cf-dceaa641b9b3) and start prompting.
+- Node.js 18+
+- npm or yarn
 
-Changes made via Lovable will be committed automatically to this repo.
+### Installation
 
-**Use your preferred IDE**
+```bash
+# Clone the repository
+git clone https://github.com/WozaMali/SebenzaOne.git
+cd SebenzaOne/landing-site
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+# Install dependencies
+npm install
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The site will be available at `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🛠️ Available Scripts
 
-**Use GitHub Codespaces**
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Build for production |
+| `npm run preview` | Preview production build |
+| `npm run lint` | Run ESLint |
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🏗️ Technology Stack
 
-## What technologies are used for this project?
+- **Vite** - Fast build tool and dev server
+- **React 18** - UI library
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Utility-first CSS framework
+- **Radix UI** - Accessible component primitives
+- **Lucide React** - Beautiful icons
 
-This project is built with:
+## 📁 Project Structure
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```
+landing-site/
+├── src/
+│   ├── components/     # React components
+│   ├── assets/        # Images and static files
+│   ├── contexts/      # React contexts
+│   ├── hooks/         # Custom hooks
+│   ├── lib/           # Utility functions
+│   └── pages/         # Page components
+├── public/            # Static assets
+└── package.json       # Dependencies and scripts
+```
 
-## How can I deploy this project?
+## 🎨 Features
 
-Simply open [Lovable](https://lovable.dev/projects/61259901-8be8-4a82-a3cf-dceaa641b9b3) and click on Share -> Publish.
+- **Responsive Design** - Mobile-first approach
+- **Modern UI** - Clean, professional design
+- **Fast Loading** - Optimized for performance
+- **SEO Optimized** - Meta tags and structured data
+- **Accessibility** - WCAG compliant components
 
-## Can I connect a custom domain to my Lovable project?
+## 🚀 Deployment
 
-Yes, you can!
+### Production Build
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+```bash
+npm run build
+```
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+The built files will be in the `dist/` directory.
+
+### Deploy to Production
+
+1. Build the application: `npm run build`
+2. Upload the `dist/` directory to your web server
+3. Configure your web server to serve static files
+4. Set up DNS to point `sebenzawaste.co.za` to your server
+
+## 🔧 Configuration
+
+### Environment Variables
+
+- `.env.development` - Development settings
+- `.env.production` - Production settings
+
+### Domain Configuration
+
+The site is configured for:
+- **Production**: `sebenzawaste.co.za`
+- **Development**: `localhost:8080`
+
+## 📱 Components
+
+- **Hero Section** - Main landing area with call-to-action
+- **Features** - Key benefits and features
+- **About** - Company information
+- **Contact** - Contact form and information
+- **Footer** - Links and additional information
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/new-feature`
+3. Commit changes: `git commit -am 'Add new feature'`
+4. Push to branch: `git push origin feature/new-feature`
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+## 🆘 Support
+
+For support and questions:
+- Create an issue in the repository
+- Contact the development team
