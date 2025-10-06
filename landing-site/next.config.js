@@ -5,8 +5,8 @@ const nextConfig = {
     reactCompiler: false,
   },
   // Enable static exports for Vercel deployment
-  // output: 'export',
-  // trailingSlash: true,
+  output: 'export',
+  trailingSlash: true,
   // Disable image optimization for static export
   images: {
     unoptimized: true,
