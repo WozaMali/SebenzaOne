@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Coins, BarChart3, Zap, Home, Scale, DollarSign, TrendingUp } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
-import Image from "next/image";
 
 const WozaMali = () => {
   const [isVisible, setIsVisible] = useState(false);

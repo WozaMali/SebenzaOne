@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import ContactForm from "./ContactForm";
-import Image from "next/image";
 import { useTheme } from "@/contexts/ThemeContext";
 
 const Navigation = () => {
@@ -32,11 +31,9 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-24">
           {/* Logo */}
           <div className="flex items-center">
-            <Image
+            <img
               src={theme === 'light' ? "/SNW LOGO 1.png" : "/SNWG LOGO.png"}
               alt="Sebenza Nathi Waste Group Logo"
-              width={64}
-              height={64}
               className="h-16 w-auto"
             />
           </div>

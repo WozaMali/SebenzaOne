@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button";
 import Navigation from "./Navigation";
 import { useEffect, useState } from "react";
-import Image from "next/image";
 
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -24,11 +23,10 @@ const Hero = () => {
       <section className="relative h-screen w-full overflow-hidden">
         {/* Video/Image Background */}
         <div className="absolute inset-0">
-          <Image
+          <img
             src="/SNWG Soweto.jpg"
             alt="Landfill waste management and recycling activities"
-            fill
-            className="object-cover"
+            className="w-full h-full object-cover"
             style={{
               transform: isLoaded ? 'scale(1)' : 'scale(2.5)',
               filter: isLoaded ? 'brightness(1) contrast(1) saturate(1)' : 'brightness(0.5) contrast(1.3) saturate(1.2)',

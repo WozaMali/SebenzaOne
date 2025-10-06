@@ -7,7 +7,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { GraduationCap, Lightbulb, TrendingUp, ArrowRightLeft } from "lucide-react";
 import { toast } from "sonner";
 import GreenScholarPopup from "./GreenScholarPopup";
-import Image from "next/image";
 
 const GreenScholar = () => {
   const [formData, setFormData] = useState({
