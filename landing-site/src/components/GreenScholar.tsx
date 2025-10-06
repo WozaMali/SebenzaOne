@@ -130,37 +130,45 @@ const GreenScholar = () => {
               </div>
               
               {/* Green Scholar Fund Card */}
-              <Card 
-                className="group border-primary/30 bg-card/50 cursor-pointer transform-gpu relative overflow-hidden transition-all duration-500 ease-out" 
-                onClick={() => setIsPopupOpen(true)}
-                style={{
-                  transform: 'perspective(1000px) rotateX(5deg) rotateY(-2deg)',
-                  boxShadow: `
-                    0 25px 50px rgba(0, 0, 0, 0.25),
-                    0 12px 24px rgba(0, 0, 0, 0.15),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.1)
-                  `,
-                  border: '1px solid rgba(255, 255, 255, 0.1)'
-                }}
-                       onMouseEnter={(e) => {
-                         e.currentTarget.style.transform = 'perspective(1000px) rotateX(2deg) rotateY(-1deg) translateY(-8px) scale(1.02)';
-                         e.currentTarget.style.boxShadow = `
-                           0 35px 70px rgba(0, 0, 0, 0.35),
-                           0 20px 40px rgba(0, 0, 0, 0.25),
-                           0 0 40px rgba(34, 197, 94, 0.4),
-                           0 0 80px rgba(34, 197, 94, 0.2),
-                           inset 0 1px 0 rgba(255, 255, 255, 0.2)
-                         `;
-                       }}
-                       onMouseLeave={(e) => {
-                         e.currentTarget.style.transform = 'perspective(1000px) rotateX(5deg) rotateY(-2deg)';
-                         e.currentTarget.style.boxShadow = `
-                           0 25px 50px rgba(0, 0, 0, 0.25),
-                           0 12px 24px rgba(0, 0, 0, 0.15),
-                           inset 0 1px 0 rgba(255, 255, 255, 0.1)
-                         `;
-                       }}
-              >
+              <div className="relative group">
+                {/* Glow effect container - outside the card */}
+                <div 
+                  className="absolute -inset-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(16, 185, 129, 0.2))',
+                    filter: 'blur(8px)',
+                    zIndex: -1
+                  }}
+                />
+                <Card 
+                  className="border-primary/30 bg-card/50 cursor-pointer transform-gpu relative overflow-hidden transition-all duration-500 ease-out" 
+                  onClick={() => setIsPopupOpen(true)}
+                  style={{
+                    transform: 'perspective(1000px) rotateX(5deg) rotateY(-2deg)',
+                    boxShadow: `
+                      0 25px 50px rgba(0, 0, 0, 0.25),
+                      0 12px 24px rgba(0, 0, 0, 0.15),
+                      inset 0 1px 0 rgba(255, 255, 255, 0.1)
+                    `,
+                    border: '1px solid rgba(255, 255, 255, 0.1)'
+                  }}
+                         onMouseEnter={(e) => {
+                           e.currentTarget.style.transform = 'perspective(1000px) rotateX(2deg) rotateY(-1deg) translateY(-8px) scale(1.02)';
+                           e.currentTarget.style.boxShadow = `
+                             0 35px 70px rgba(0, 0, 0, 0.35),
+                             0 20px 40px rgba(0, 0, 0, 0.25),
+                             inset 0 1px 0 rgba(255, 255, 255, 0.2)
+                           `;
+                         }}
+                         onMouseLeave={(e) => {
+                           e.currentTarget.style.transform = 'perspective(1000px) rotateX(5deg) rotateY(-2deg)';
+                           e.currentTarget.style.boxShadow = `
+                             0 25px 50px rgba(0, 0, 0, 0.25),
+                             0 12px 24px rgba(0, 0, 0, 0.15),
+                             inset 0 1px 0 rgba(255, 255, 255, 0.1)
+                           `;
+                         }}
+                >
                 <CardContent className="p-4 relative z-10">
                   <div className="flex items-center justify-between">
                     <span 
@@ -205,6 +213,7 @@ const GreenScholar = () => {
                          }}
                        ></div>
               </Card>
+              </div>
             </div>
           </div>
 
