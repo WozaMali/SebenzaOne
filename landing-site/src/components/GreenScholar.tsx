@@ -100,7 +100,12 @@ const GreenScholar = () => {
               className="h-32 w-auto"
               onError={(e) => {
                 console.error('Green Scholar image failed to load:', e);
-                e.currentTarget.style.display = 'none';
+                const img = e.currentTarget;
+                if (!img.src.includes('green-scholar.png')) {
+                  img.src = '/green-scholar.png';
+                } else {
+                  img.style.display = 'none';
+                }
               }}
             />
           </div>
@@ -234,7 +239,12 @@ const GreenScholar = () => {
                 className="w-full max-w-md h-auto"
                 onError={(e) => {
                   console.error('Maisha image failed to load:', e);
-                  e.currentTarget.style.display = 'none';
+                  const img = e.currentTarget;
+                  if (!img.src.includes('maisha.png')) {
+                    img.src = '/maisha.png';
+                  } else {
+                    img.style.display = 'none';
+                  }
                 }}
               />
             </div>

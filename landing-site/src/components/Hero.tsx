@@ -36,9 +36,11 @@ const Hero = () => {
             onError={(e) => {
               console.error('Hero image failed to load:', e);
               console.log('Attempting to load:', e.currentTarget.src);
-              // Try alternative path
+              // Try alternative paths
               const img = e.currentTarget;
-              if (!img.src.includes('hero-landfill.jpg')) {
+              if (!img.src.includes('snwg-soweto.jpg')) {
+                img.src = '/snwg-soweto.jpg';
+              } else if (!img.src.includes('hero-landfill.jpg')) {
                 img.src = '/hero-landfill.jpg';
               } else {
                 img.style.display = 'none';
