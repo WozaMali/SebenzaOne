@@ -98,6 +98,10 @@ const GreenScholar = () => {
               src="/Green Scholar.png"
               alt="Green Scholar Logo"
               className="h-32 w-auto"
+              onError={(e) => {
+                console.error('Green Scholar image failed to load:', e);
+                e.currentTarget.style.display = 'none';
+              }}
             />
           </div>
         </div>
@@ -228,6 +232,10 @@ const GreenScholar = () => {
                 src="/Maisha.png"
                 alt="Maisha bottle buddy - Green Scholar mascot"
                 className="w-full max-w-md h-auto"
+                onError={(e) => {
+                  console.error('Maisha image failed to load:', e);
+                  e.currentTarget.style.display = 'none';
+                }}
               />
             </div>
           </div>

@@ -33,6 +33,11 @@ const Hero = () => {
               transformOrigin: 'center center',
               transition: 'all 8000ms ease-out'
             }}
+            onError={(e) => {
+              console.error('Hero image failed to load:', e);
+              // Fallback to a solid color background
+              e.currentTarget.style.display = 'none';
+            }}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/70 to-background"></div>
         </div>

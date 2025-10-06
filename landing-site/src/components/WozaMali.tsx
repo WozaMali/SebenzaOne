@@ -66,6 +66,10 @@ const WozaMali = () => {
           src="/Land.png"
           alt="Landfill landscape"
           className="h-full w-full object-cover"
+          onError={(e) => {
+            console.error('Land image failed to load:', e);
+            e.currentTarget.style.display = 'none';
+          }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background to-background/90"></div>
       </div>

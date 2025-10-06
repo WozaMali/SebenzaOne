@@ -23,6 +23,10 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  // Ensure static assets are properly served
+  assetPrefix: process.env.NODE_ENV === 'production' ? '' : '',
+  // Add base path if needed for deployment
+  basePath: '',
 }
 
 module.exports = nextConfig
