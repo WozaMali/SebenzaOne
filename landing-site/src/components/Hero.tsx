@@ -119,7 +119,7 @@ const Hero = () => {
               <Button
                 size="lg"
                 variant="outline"
-                className={`group relative border-primary/50 text-foreground hover:bg-primary/10 transition-all duration-1000 ease-out text-base sm:text-lg hover:scale-110 hover:border-primary hover:shadow-lg hover:shadow-primary/20 overflow-hidden ${
+                className={`group relative border-orange-500/50 text-orange-600 hover:bg-orange-500/10 transition-all duration-1000 ease-out text-base sm:text-lg hover:scale-110 hover:border-orange-500 hover:shadow-lg hover:shadow-orange-500/20 overflow-hidden ${
                   isLoaded ? 'button-slide-in' : 'button-slide-right'
                 }`}
                 onClick={() => scrollToSection("green-scholar")}
@@ -128,9 +128,9 @@ const Hero = () => {
                 }}
               >
                 <span className="relative z-10 transition-all duration-300 group-hover:translate-x-1">Donate PET</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-primary/5 rounded-md opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-                <div className="absolute -inset-1 bg-gradient-to-r from-primary/10 to-transparent rounded-md blur-sm opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-primary/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-orange-500/5 rounded-md opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                <div className="absolute -inset-1 bg-gradient-to-r from-orange-500/10 to-transparent rounded-md blur-sm opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-orange-500/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
               </Button>
             </div>
             <p className={`mt-6 sm:mt-8 text-xs sm:text-sm text-muted-foreground transition-all duration-1000 ease-out delay-1000 ${

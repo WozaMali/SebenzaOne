@@ -1,7 +1,7 @@
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card";
-import { MapPin, Users, Briefcase } from "lucide-react";
+import { MapPin, Users, Briefcase, TreePine } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 
 const MakeSowetoGreen = () => {
@@ -44,6 +44,11 @@ const MakeSowetoGreen = () => {
       title: "Tourism readiness",
       text: "Cleaner corridors support local business and culture",
     },
+    {
+      icon: TreePine,
+      title: "Plant A Tree",
+      text: "We plan to plant 200 trees in 40 schools in 2026",
+    },
   ];
 
   return (
@@ -62,7 +67,7 @@ const MakeSowetoGreen = () => {
           </p>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-3 card-container">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 card-container">
           {impacts.map((impact, index) => (
             <div key={index} className="relative group">
               <Card
@@ -126,13 +131,6 @@ const MakeSowetoGreen = () => {
               ></div>
 
                 {/* Hover Flare Effect */}
-                <div 
-                  className="absolute top-0 left-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                  style={{
-                    background: 'radial-gradient(circle at 50% 30%, rgba(34, 197, 94, 0.3) 0%, rgba(34, 197, 94, 0.15) 30%, transparent 60%)',
-                    transform: 'translateZ(-3px)'
-                  }}
-                ></div>
               </Card>
             </div>
           ))}

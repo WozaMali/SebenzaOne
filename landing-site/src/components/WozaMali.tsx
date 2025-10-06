@@ -165,13 +165,6 @@ const WozaMali = () => {
                      ></div>
 
                   {/* Hover Flare Effect */}
-                  <div 
-                    className="absolute top-0 left-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                    style={{
-                      background: 'radial-gradient(circle at 50% 30%, rgba(34, 197, 94, 0.3) 0%, rgba(34, 197, 94, 0.15) 30%, transparent 60%)',
-                      transform: 'translateZ(-3px)'
-                    }}
-                  ></div>
                 </Card>
               </div>
             ))}
@@ -247,13 +240,6 @@ const WozaMali = () => {
                          ></div>
 
                        {/* Hover Flare Effect */}
-                       <div 
-                         className="absolute top-0 left-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                         style={{
-                           background: 'radial-gradient(circle at 50% 30%, rgba(34, 197, 94, 0.3) 0%, rgba(34, 197, 94, 0.15) 30%, transparent 60%)',
-                           transform: 'translateZ(-3px)'
-                         }}
-                       ></div>
                 </Card>
                 </div>
                 {/* Connector Arrow */}

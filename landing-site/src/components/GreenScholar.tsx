@@ -220,7 +220,11 @@ const GreenScholar = () => {
 
           {/* Right: Maisha Image */}
           <div className="flex justify-center items-center">
-            <div className="relative">
+            <div className={`relative transition-all duration-1200 ease-out delay-1000 ${
+              isVisible 
+                ? 'translate-x-0 opacity-100' 
+                : 'translate-x-32 opacity-0'
+            }`}>
               <img
                 src="/Maisha.png"
                 alt="Maisha bottle buddy - Green Scholar mascot"
