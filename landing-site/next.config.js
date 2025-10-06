@@ -14,7 +14,7 @@ const nextConfig = {
     formats: ['image/webp', 'image/avif'],
   },
   // Set the output file tracing root to avoid workspace warnings
-  outputFileTracingRoot: undefined,
+  outputFileTracingRoot: __dirname,
   // Disable ESLint during build to avoid warnings
   eslint: {
     ignoreDuringBuilds: true,

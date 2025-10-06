@@ -121,7 +121,7 @@ export function ChatWindow({ person, onClose, onMinimize, onExpand }: ChatWindow
 
   useEffect(() => {
     setMessages(sampleMessages)
-  }, [person.id])
+  }, [person.id, sampleMessages])
 
   useEffect(() => {
     scrollToBottom()

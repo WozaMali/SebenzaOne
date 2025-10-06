@@ -25,7 +25,7 @@ const Hero = () => {
         {/* Video/Image Background */}
         <div className="absolute inset-0">
           <Image
-            src="/Phakama Soweto.png"
+            src="/SNWG Soweto.jpg"
             alt="Landfill waste management and recycling activities"
             fill
             className="object-cover"

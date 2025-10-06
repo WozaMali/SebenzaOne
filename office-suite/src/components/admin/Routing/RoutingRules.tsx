@@ -26,7 +26,8 @@ import {
   Clock,
   Settings,
   Filter,
-  Search
+  Search,
+  X
 } from 'lucide-react'
 
 // ============================================================================

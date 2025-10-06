@@ -16,7 +16,9 @@ import {
   RefreshCw,
   Shield,
   Mail,
-  Server
+  Server,
+  X,
+  ChevronRight
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
