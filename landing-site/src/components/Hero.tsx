@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import Navigation from "./Navigation";
 import { useEffect, useState } from "react";
+import heroImage from "@/assets/SNWG Soweto.jpg";
 
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -24,7 +25,7 @@ const Hero = () => {
         {/* Video/Image Background */}
         <div className="absolute inset-0">
           <img
-            src="/SNWG Soweto.jpg"
+            src={heroImage}
             alt="Landfill waste management and recycling activities"
             className="w-full h-full object-cover"
             style={{

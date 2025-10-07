@@ -7,6 +7,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { GraduationCap, Lightbulb, TrendingUp, ArrowRightLeft } from "lucide-react";
 import { toast } from "sonner";
 import GreenScholarPopup from "./GreenScholarPopup";
+import greenScholarLogo from "@/assets/Green Scholar.png";
+import maishaImage from "@/assets/Maisha.png";
 
 const GreenScholar = () => {
   const [formData, setFormData] = useState({
@@ -95,7 +97,7 @@ const GreenScholar = () => {
               : 'translate-y-8 opacity-0'
           }`}>
             <img
-              src="/Green Scholar.png"
+              src={greenScholarLogo}
               alt="Green Scholar Logo"
               className="h-32 w-auto"
               onError={(e) => {
@@ -234,7 +236,7 @@ const GreenScholar = () => {
                 : 'translate-x-32 opacity-0'
             }`}>
               <img
-                src="/Maisha.png"
+                src={maishaImage}
                 alt="Maisha bottle buddy - Green Scholar mascot"
                 className="w-full max-w-md h-auto"
                 onError={(e) => {
