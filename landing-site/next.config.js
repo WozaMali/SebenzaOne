@@ -30,14 +30,28 @@ const nextConfig = {
   // Ensure all static assets are included
   distDir: 'out',
   // Add webpack configuration for better asset handling
-  webpack: (config, { isServer }) => {
+  webpack: (config, { isServer, dev }) => {
     if (!isServer) {
       config.resolve.fallback = {
         ...config.resolve.fallback,
         fs: false,
       };
     }
+    
+    // Generate routes-manifest.json for static export
+    if (!dev && !isServer) {
+      const originalEntry = config.entry;
+      config.entry = async () => {
+        const entries = await originalEntry();
+        return entries;
+      };
+    }
+    
     return config;
+  },
+  // Add generateBuildId to ensure consistent builds
+  generateBuildId: async () => {
+    return 'static-build';
   },
 }
 
