@@ -5,10 +5,6 @@ import { Sidebar } from '@/components/sidebar/Sidebar'
 export const metadata: Metadata = {
   title: 'Sebenza Accounts',
   description: 'Accounting and financial management application',
-  icons: {
-    icon: '/favicon.png',
-    apple: '/favicon.png',
-  },
 }
 
 export default function RootLayout({
