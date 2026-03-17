@@ -5,36 +5,25 @@
   "private": true,
   "workspaces": [
     "landing-site",
-    "office-suite",
-    "packages/*",
     "apps/*"
   ],
   "scripts": {
     "dev": "npm run dev:all",
-    "dev:all": "concurrently \"npm run dev:landing\" \"npm run dev:office\" \"npm run dev:accounts\" \"npm run dev:crm\" \"npm run dev:projects\"",
+    "dev:all": "concurrently \"npm run dev:landing\" \"npm run dev:accounts\" \"npm run dev:crm\" \"npm run dev:projects\"",
     "dev:landing": "cd landing-site && npm run dev",
-    "dev:office": "cd office-suite && npm run dev",
     "dev:accounts": "cd apps/accounts-app && npm run dev",
     "dev:crm": "cd apps/crm-app && npm run dev",
     "dev:projects": "cd apps/projects-app && npm run dev",
-    "dev:packages": "cd packages/supabase-config && npm run dev",
-    "build": "npm run build:packages && npm run build:all",
-    "build:packages": "cd packages/supabase-config && npm install && npm run build",
-    "build:all": "npm run build:landing && npm run build:office",
+    "build": "npm run build:landing",
     "build:landing": "cd landing-site && npm run build",
-    "build:office": "cd office-suite && npm run build",
     "start": "npm run start:all",
-    "start:all": "concurrently \"npm run start:landing\" \"npm run start:office\"",
+    "start:all": "concurrently \"npm run start:landing\"",
     "start:landing": "cd landing-site && npm run start",
-    "start:office": "cd office-suite && npm run start",
-    "install:all": "npm install && cd packages/supabase-config && npm install && cd ../../landing-site && npm install && cd ../office-suite && npm install",
-    "clean": "npm run clean:packages && npm run clean:landing && npm run clean:office",
-    "clean:packages": "cd packages/supabase-config && rm -rf dist node_modules",
+    "install:all": "npm install && cd landing-site && npm install",
+    "clean": "npm run clean:landing",
     "clean:landing": "cd landing-site && rm -rf dist node_modules",
-    "clean:office": "cd office-suite && rm -rf .next node_modules",
-    "lint": "npm run lint:landing && npm run lint:office",
-    "lint:landing": "cd landing-site && npm run lint",
-    "lint:office": "cd office-suite && npm run lint"
+    "lint": "npm run lint:landing",
+    "lint:landing": "cd landing-site && npm run lint"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
