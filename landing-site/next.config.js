@@ -4,8 +4,8 @@ const nextConfig = {
     // Enable React 19 features
     reactCompiler: false,
   },
-  // Enable static exports for Vercel deployment
-  output: 'export',
+  // Enable static exports for Vercel deployment (only in production)
+  ...(process.env.NODE_ENV === 'production' && { output: 'export' }),
   trailingSlash: true,
   // Disable image optimization for static export
   images: {

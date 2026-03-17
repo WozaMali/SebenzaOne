@@ -5,14 +5,21 @@
   "private": true,
   "workspaces": [
     "landing-site",
-    "office-suite"
+    "office-suite",
+    "packages/*",
+    "apps/*"
   ],
   "scripts": {
     "dev": "npm run dev:all",
-    "dev:all": "concurrently \"npm run dev:landing\" \"npm run dev:office\"",
+    "dev:all": "concurrently \"npm run dev:landing\" \"npm run dev:office\" \"npm run dev:accounts\" \"npm run dev:crm\" \"npm run dev:projects\"",
     "dev:landing": "cd landing-site && npm run dev",
     "dev:office": "cd office-suite && npm run dev",
-    "build": "npm run build:all",
+    "dev:accounts": "cd apps/accounts-app && npm run dev",
+    "dev:crm": "cd apps/crm-app && npm run dev",
+    "dev:projects": "cd apps/projects-app && npm run dev",
+    "dev:packages": "cd packages/supabase-config && npm run dev",
+    "build": "npm run build:packages && npm run build:all",
+    "build:packages": "cd packages/supabase-config && npm install && npm run build",
     "build:all": "npm run build:landing && npm run build:office",
     "build:landing": "cd landing-site && npm run build",
     "build:office": "cd office-suite && npm run build",
@@ -20,8 +27,9 @@
     "start:all": "concurrently \"npm run start:landing\" \"npm run start:office\"",
     "start:landing": "cd landing-site && npm run start",
     "start:office": "cd office-suite && npm run start",
-    "install:all": "npm install && cd landing-site && npm install && cd ../office-suite && npm install",
-    "clean": "npm run clean:landing && npm run clean:office",
+    "install:all": "npm install && cd packages/supabase-config && npm install && cd ../../landing-site && npm install && cd ../office-suite && npm install",
+    "clean": "npm run clean:packages && npm run clean:landing && npm run clean:office",
+    "clean:packages": "cd packages/supabase-config && rm -rf dist node_modules",
     "clean:landing": "cd landing-site && rm -rf dist node_modules",
     "clean:office": "cd office-suite && rm -rf .next node_modules",
     "lint": "npm run lint:landing && npm run lint:office",
@@ -46,5 +54,8 @@
     "typescript"
   ],
   "author": "Sebenza Waste Team",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "react-to-print": "^3.2.0"
+  }
 }
