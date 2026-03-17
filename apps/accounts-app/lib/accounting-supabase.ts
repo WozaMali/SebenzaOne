@@ -18,7 +18,10 @@ export async function fetchSuppliers() {
     email: r.email ?? "",
     phone: r.phone ?? "",
     idNumber: r.id_number ?? "",
-    idType: (r.id_type as string) ?? "id_number",
+    idType: ((): "ck" | "team_code" | "id_number" => {
+      const v = (r.id_type as string) ?? "id_number"
+      return v === "ck" || v === "team_code" || v === "id_number" ? v : "id_number"
+    })(),
     address: r.address ?? "",
     bankDetails: r.bank_details ?? "",
     kycStatus: r.kyc_status ?? "pending",
@@ -175,7 +178,10 @@ export async function fetchMaterialPricing() {
     reviewDate: r.review_date ? new Date(r.review_date).toISOString().split("T")[0] : "",
     supplierId: r.supplier_id ?? undefined,
     customerId: r.customer_id ?? undefined,
-    status: (r.status as string) ?? "draft",
+    status: ((): "draft" | "active" | "inactive" | "expired" => {
+      const v = (r.status as string) ?? "draft"
+      return v === "draft" || v === "active" || v === "inactive" || v === "expired" ? v : "draft"
+    })(),
     internalNotes: r.internal_notes ?? "",
   }))
 }
@@ -581,7 +587,7 @@ export async function fetchBills() {
     vendor: r.vendor ?? "",
     amount: Number(r.amount ?? 0),
     dueDate: r.due_date ? new Date(r.due_date).toISOString().split("T")[0] : "",
-    status: r.status === "paid" ? "paid" : "unpaid",
+    status: (r.status === "paid" ? "paid" : "unpaid") as "paid" | "unpaid",
     description: r.description ?? "",
     category: r.category ?? "General",
   }))

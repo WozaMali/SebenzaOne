@@ -228,6 +228,8 @@ export default function AccountingPage() {
     busy: false,
   })
 
+  const fulfilledValue = <T,>(r: PromiseSettledResult<T>): T | null => (r.status === "fulfilled" ? r.value : null)
+
   const navigationSections = [
     {
       key: 'material-purchases',
@@ -475,18 +477,18 @@ export default function AccountingPage() {
           accSb.fetchBills(),
           accSb.fetchChartAccounts(),
         ])
-        if (s.status === 'fulfilled') setSuppliers(s.value)
-        if (w.status === 'fulfilled') setWeighbridgeTickets(w.value)
-        if (p.status === 'fulfilled') setMaterialPricing(p.value)
-        if (bl.status === 'fulfilled') setBaleLots(bl.value)
-        if (c.status === 'fulfilled') setComplianceFees(c.value)
-        if (l.status === 'fulfilled') setLogisticsCosts(l.value)
-        if (cd.status === 'fulfilled') setCashDrawers(cd.value)
-        if (ba.status === 'fulfilled') setBankAccounts(ba.value)
-        if (vc.status === 'fulfilled') setVendorCustomers(vc.value)
-        if (pm.status === 'fulfilled') setPayments(pm.value)
-        if (billsRes.status === 'fulfilled') setBills(billsRes.value)
-        if (ca.status === 'fulfilled') setChartAccounts(ca.value)
+        const sv = fulfilledValue(s); if (sv) setSuppliers(sv)
+        const wv = fulfilledValue(w); if (wv) setWeighbridgeTickets(wv)
+        const pv = fulfilledValue(p); if (pv) setMaterialPricing(pv)
+        const blv = fulfilledValue(bl); if (blv) setBaleLots(blv)
+        const cv = fulfilledValue(c); if (cv) setComplianceFees(cv)
+        const lv = fulfilledValue(l); if (lv) setLogisticsCosts(lv)
+        const cdv = fulfilledValue(cd); if (cdv) setCashDrawers(cdv)
+        const bav = fulfilledValue(ba); if (bav) setBankAccounts(bav)
+        const vcv = fulfilledValue(vc); if (vcv) setVendorCustomers(vcv)
+        const pmv = fulfilledValue(pm); if (pmv) setPayments(pmv)
+        const billsV = fulfilledValue(billsRes); if (billsV) setBills(billsV)
+        const cav = fulfilledValue(ca); if (cav) setChartAccounts(cav)
       } catch {}
     }
     load()
@@ -518,18 +520,18 @@ export default function AccountingPage() {
         accSb.fetchBills(),
         accSb.fetchChartAccounts(),
       ])
-      if (s.status === "fulfilled") setSuppliers(s.value)
-      if (w.status === "fulfilled") setWeighbridgeTickets(w.value)
-      if (p.status === "fulfilled") setMaterialPricing(p.value)
-      if (bl.status === "fulfilled") setBaleLots(bl.value)
-      if (c.status === "fulfilled") setComplianceFees(c.value)
-      if (l.status === "fulfilled") setLogisticsCosts(l.value)
-      if (cd.status === "fulfilled") setCashDrawers(cd.value)
-      if (ba.status === "fulfilled") setBankAccounts(ba.value)
-      if (vc.status === "fulfilled") setVendorCustomers(vc.value)
-      if (pm.status === "fulfilled") setPayments(pm.value)
-      if (billsRes.status === "fulfilled") setBills(billsRes.value)
-      if (ca.status === "fulfilled") setChartAccounts(ca.value)
+      const sv = fulfilledValue(s); if (sv) setSuppliers(sv)
+      const wv = fulfilledValue(w); if (wv) setWeighbridgeTickets(wv)
+      const pv = fulfilledValue(p); if (pv) setMaterialPricing(pv)
+      const blv = fulfilledValue(bl); if (blv) setBaleLots(blv)
+      const cv = fulfilledValue(c); if (cv) setComplianceFees(cv)
+      const lv = fulfilledValue(l); if (lv) setLogisticsCosts(lv)
+      const cdv = fulfilledValue(cd); if (cdv) setCashDrawers(cdv)
+      const bav = fulfilledValue(ba); if (bav) setBankAccounts(bav)
+      const vcv = fulfilledValue(vc); if (vcv) setVendorCustomers(vcv)
+      const pmv = fulfilledValue(pm); if (pmv) setPayments(pmv)
+      const billsV = fulfilledValue(billsRes); if (billsV) setBills(billsV)
+      const cav = fulfilledValue(ca); if (cav) setChartAccounts(cav)
     } catch {}
     toast({ title: "Refreshed", description: "Data reloaded from server." })
   }
@@ -769,8 +771,10 @@ export default function AccountingPage() {
     return Object.entries(bySup).sort((a,b)=>b[1].kg-a[1].kg).slice(0,5)
   }, [weighbridgeTickets, suppliers, materialPricing])
   const complianceCollected = useMemo(()=> complianceFees.filter(f=>f.status==='paid').reduce((s,f)=>s+(f.amount||0),0), [complianceFees])
-  const complianceRemitted = useMemo(()=> complianceFees.filter(f=>f.status==='remitted').reduce((s,f)=>s+(f.amount||0),0), [complianceFees])
-  const complianceOutstanding = complianceCollected - complianceRemitted
+  // The current schema supports only 'pending'|'paid' for compliance fees.
+  // Treat "remitted" as out-of-scope for now.
+  const complianceRemitted = 0
+  const complianceOutstanding = complianceCollected
   const cogsEstimate = useMemo(()=> weighbridgeTickets.reduce((s,t)=>s+(t.netWeight||0)*(materialPricing.find(p=>p.material===t.material)?.basePrice||0),0), [weighbridgeTickets, materialPricing])
   const operatingExpenses = spend - cogsEstimate
   const netProfit = revenue - cogsEstimate - Math.max(0, operatingExpenses)
@@ -805,7 +809,7 @@ export default function AccountingPage() {
   }
   const openEditInv = (i: Invoice) => { setEditingInv(i); setInvDialog(true) }
   const saveInv = async (override?: Partial<Invoice>) => {
-    const inv = editingInv
+    const rawInv = editingInv
       ? { ...editingInv, ...override }
       : override
       ? {
@@ -821,7 +825,17 @@ export default function AccountingPage() {
           ...override,
         }
       : null
-    if (!inv) return
+    if (!rawInv) return
+
+    const normalizeInvoiceStatus = (s: any): InvoiceStatus => {
+      const v = String(s || "draft")
+      return v === "draft" || v === "sent" || v === "paid" || v === "overdue" ? (v as InvoiceStatus) : "draft"
+    }
+
+    const inv: Invoice = {
+      ...(rawInv as Invoice),
+      status: normalizeInvoiceStatus((rawInv as any).status),
+    }
     const exists = invoices.some(i => i.id === inv.id)
     setInvoices(prev => exists ? prev.map(i => i.id === inv.id ? inv : i) : prev.concat(inv))
     if (supabase) {
@@ -4800,16 +4814,8 @@ export default function AccountingPage() {
                                   variant="ghost"
                                   size="sm"
                                   className="text-gray-600 hover:text-gray-800"
-                                  title="Delete (force)"
-                                  onClick={async () => {
-                                    try {
-                                      await deleteInv(invoice.id)
-                                      toast({ title: "Deleted", description: "Invoice has been deleted." })
-                                    } catch (e) {
-                                      console.error(e)
-                                      toast({ title: "Delete failed", description: "Could not delete invoice.", variant: "destructive" })
-                                    }
-                                  }}
+                                  title="Delete"
+                                  onClick={() => handleDeleteChartAccount(account.id)}
                                 >
                                   <MoreHorizontal className="h-4 w-4" />
                                 </Button>
@@ -6094,6 +6100,7 @@ export default function AccountingPage() {
                                         email: '',
                                         phone: '',
                                         idNumber: '',
+                                        idType: 'id_number',
                                         address: '',
                                         bankDetails: '',
                                         kycStatus: 'pending',
@@ -9356,7 +9363,7 @@ export default function AccountingPage() {
                 >
                   Cancel
                 </Button>
-                <Button onClick={saveInv} className="bg-orange-600 hover:bg-orange-700">
+                <Button onClick={() => saveInv()} className="bg-orange-600 hover:bg-orange-700">
                   Save Invoice
                 </Button>
               </div>

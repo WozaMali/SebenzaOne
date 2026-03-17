@@ -89,8 +89,8 @@ export function FinancialReports({
       ["Net Income", fmt(reportData.netIncome)],
       ["Invoice Count", String(reportData.invoiceCount)],
       ["Expense Count", String(reportData.expenseCount)],
-      ...Object.entries(reportData.expenseByCategory).map(([cat, amt]) => [`Expense: ${cat}`, fmt(amt)]),
-      ...Object.entries(reportData.revenueByMonth).map(([month, amt]) => [`Revenue: ${month}`, fmt(amt)]),
+      ...Object.entries(reportData.expenseByCategory).map(([cat, amt]) => [`Expense: ${cat}`, fmt(Number(amt) || 0)]),
+      ...Object.entries(reportData.revenueByMonth).map(([month, amt]) => [`Revenue: ${month}`, fmt(Number(amt) || 0)]),
     ]
     downloadReportCsv(`financial-report-${dateFrom || "all"}-${dateTo || "all"}.csv`, headers, rows)
   }
